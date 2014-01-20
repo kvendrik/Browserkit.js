@@ -1,4 +1,4 @@
-#Browserkit.js - A customisable mini library
+#Browserkit.js
 
 Browserkit is a customisable mini library(3kb) for small to medium sized web projects which helps you save loads of production time by making things like getting and handling elements fast and easy without having to load big javascript files with functions your project doesn't need.
 
