@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Browserkit</title>
+</head>
+<body>
+
+	<div id='elid' class='hithere'>Hello</div>
+
+	<section class='area area2'>
+		
+		<article class='column'></article>
+		<article class='column'></article>
+
+	</section>
+	
+<script src='browserkit-v1.0.js'></script>
+<script>
+
+	var msgs = ['passed','false'],
+	d = function(condition, testName){
+
+		window.onerror = function(msg, url, line){
+			alert(testName+' : '+msg+' in '+url+' on line '+line);
+		}
+
+		if(condition === true){
+			alert(msgs[0]+' '+testName);
+		} else {
+			alert(msgs[1]+' '+testName);
+		}
+
+	};
+
+	var debug = function(){
+
+			//removeClass
+			B('section.area').removeClass('area2');
+			d('area'===document.querySelector('section.area').className, 'removeClass');
+
+			//removeClass, addClass & addEvent
+			B('div#elid').removeClass('hithere').addClass('hidden').click(function(){
+				alert('hi');
+			});
+			console.log(document.querySelector('div#elid').className);
+			d(' hidden'===document.querySelector('div#elid').className, 'removeClass, addClass & addEvent');
+
+			//Array.indexOf
+			d(0===[1,2,3].indexOf(1), 'Array.indexOf');
+
+			//getElementsByClassName
+			d('column'===document.getElementsByClassName('column')[0].className, 'getElementsByClassName');
+
+			//onResizeEnd
+			B(window).resizeEnd(function(){
+				alert('resize ended');
+			});
+
+	}();
+
+</script>
+</body>
+</html>
