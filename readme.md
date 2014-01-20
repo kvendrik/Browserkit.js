@@ -1,30 +1,38 @@
-#Browserkit.js
+Browserkit.js
+=============
 
-Browserkit is a customisable mini library(3kb) for small to medium sized web projects which helps you save loads of production time by making things like getting and handling elements fast and easy without having to load big javascript files with methods your project doesn't need.
+###A customisable & lightweight mini library (3kb) that makes used functionalities fast and easy
 
-**Browser support:** All that have been tested so far. Including: IE6, Android 1.5, do I continue?
+Browserkit is a customisable and lightweight mini library (3kb minified) for small to medium sized web projects which can help save loads of time by making things like getting elements and handling classes and events fast and easy (cross-browser).
 
-**Feature requests are always welcome! Let me know what you think!**
+When your project is ready to go live you can remove the methods you don't use from Browserkit easily so your users only load what is actually being used.
+
+**Browser support:** All that have been tested so far including IE6 and Android 1.5.
+
+*Feedback is always welcome. Let me know what you think or if you notice anything. :)*
 
 ##Usage
 
-Using Browserkit is simple, include it in your project and start coding.
+Using Browserkit is simple, include it into your project and start coding. :)
 
-
-##Syntax
+###Syntax
 
 The syntax Browserkit uses is quite simular to other libraries:
 
 	B('section.kitten').addClass('is-cute');
 
-And try chaining some:
+Oh, also try chaining some:
 
 	B('section.kitten').addClass('has-bal').removeClass('is-mean').click(function(){
 		alert('Awh, thats cute!');
 	});
 
+Elements can also be selected:
 
-##What it includes
+	var kittenArea = B('section.kitten').el;
+
+
+##Features
 
 ###Methods
 
@@ -44,7 +52,7 @@ And try chaining some:
 
 ###Polyfills
 
-Instead of keeping the polyfills Browserkit uses only available within its own object it polyfills them in their original state. Which means methods like `Array.indexOf` are available from anywhere in your code, in any browser.
+Methods are polyfilled their original object, which means they are available from anywhere in your code, in any browser, hooray!
 
 * document.querySelector
 * Array.indexOf
@@ -61,6 +69,6 @@ Browserkit allows you to easily remove what you don't use to make the file as sm
 
 When removing methods you don't need from the Browserkit object make sure not to remove a funcitonality other methods you do use are using. 
 
-If you would for example want to remove the `addEvent` method because you are not using it. You would find out, after a quick search, that the `click` method is using it. Which is fine as long as you are not using this either.
+If you would for example want to remove the `addEvent` method. Do a quick search for `addEvent`. You'll notice that the `click` method is using it. Its good to note that the `click` method might not work correctly after you removed `addEvent`.
 
 
