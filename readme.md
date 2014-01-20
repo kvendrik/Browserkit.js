@@ -1,18 +1,13 @@
-#Browserkit.js
-##A customisable mini library
+#Browserkit.js - A customisable mini library
 
-Browserkit is a customisable mini library for small to medium sized web projects which can help you save loads of production time without having to load functions your project doesn't use in the final product.
+Browserkit is a customisable mini library(3kb) for small to medium sized web projects which helps you save loads of production time by making things like getting and handling elements fast and easy without having to load big javascript files with functions your project doesn't need.
 
-Libraries are great but when you import one it has to be worth the payload it gives to your project. In small to medium sized web projects this can be a problem. Bigger libraries like jQuery(32kb) often have more functionality than you actually need and removing what you don't need can get rather complicated.
-
-This is why I started making Browserkit which largly speeds up your production time by polyfilling the `querySelector`, providing cross-browser functionalities to handle classes and events and more. It is nice, small(3kb) and is easily customisable so you can fully adjust it to what your web project needs and throw out what you don't need when your project goes live.
-
-**Browser support:** IE6, Android 1.5, do I continue?
+**Browser support:** All that have been tested so far. Including: IE6, Android 1.5, do I continue?
 
 
 ##Usage
 
-Using Browserkit is simple, include it in your project and get cracking.
+Using Browserkit is simple, include it in your project and start coding.
 
 
 ##Syntax
@@ -37,29 +32,31 @@ The syntax Browserkit uses is quite simular to other libraries.
 
 * Custom events
 	* resizeEnd
-	* click *- uses Google fastbutton if FastButton method available*
+	* click *- uses Google fastbutton if the [FastButton object](https://github.com/kvendrik/google_fastbutton/blob/master/google-fastbutton.js) exists*
 
 
 ###Polyfills
 
-Next to a bunch of functions Browserkit also includes polyfills and instead of keeping them only available in its own object it polyfills them in their original state. Which means functions like `Array.indexOf` are avialable from anywere in your code, hooray!
+Instead of keeping the polyfills Browserkit uses only available within its own object it polyfills them in their original state. Which means functions like `Array.indexOf` are available from anywhere in your code, in any browser.
 
 * document.querySelector
 * Array.indexOf
 * document.getElementsByClassName
 
 
-**Feature requests are always welcome. Let me know what you would like to see in Browserkit!**
+**Feature requests are always welcome! Let me know what you would like to see in Browserkit!**
 
 
-##Customizing
+##Customisation
 
 ###Changing the `B` variable
-The Browserkit object is stored in a variable named `B` by default which can easily be changed at the bottom of the Browserkit.js file.
+The Browserkit object is by default stored in a variable named `B` which can easily be changed at the bottom of the Browserkit.js file.
 
 ###Removing functionality
-Browserkit is assambled in a simple way which allows you to easily remove what you don't use to prepare your web project for production.
+Browserkit allows you to easily remove what you don't use to make the file as small as possible before your web project goes live.
 
-When removing functions from 
+When removing functions you don't need from the Browserkit object make sure not to remove a funcitonality other functions you do use are using. 
+
+If you would for example want to remove the `addEvent` function because you are not using it. You would find out, after a quick search, that the `click` function is using it. Which is fine as long as you are not using this either.
 
 
