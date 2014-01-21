@@ -1,7 +1,7 @@
 Browserkit.js
 =============
 
-###A customisable & lightweight mini library (3kb) that polyfills often used methods and makes them faster in use
+###A customisable & lightweight mini library (3kb) that polyfills often used methods and makes them faster to use
 
 Browserkit is a customisable and lightweight mini library (3kb minified) for small to medium sized web projects which can help save loads of time by making things like getting elements and handling classes and events fast and easy (cross-browser).
 
@@ -14,6 +14,8 @@ When your project is ready to go live you can remove the methods you don't use f
 ##Usage
 
 1. Include `browserkit.min.js` in your project
+    <script src='browserkit.min.js'></script>
+
 2. Start coding! :)
 
 ###Syntax
