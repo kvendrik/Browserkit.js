@@ -1,7 +1,7 @@
 Browserkit.js
 =============
 
-Browserki.js is a customisable and lightweight mini library (3kb minified) I created for use in small to medium sized web projects were I wasn't using any bigger libraries like jQuery to make things like getting elements and handling classes and events cross-browser faster and easier.
+Browserkit.js is a customisable and lightweight mini library (3kb minified) I created for use in small to medium sized web projects were I'm not using any bigger libraries like jQuery to make things like getting elements and handling classes and events cross-browser faster and easier.
 
 It allows you to remove methods you don't use easily so your users only load methods that are actually being used.
 
