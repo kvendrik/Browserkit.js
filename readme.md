@@ -1,13 +1,11 @@
 Browserkit.js
 =============
 
-###A customisable & lightweight mini library (3kb) that polyfills often used methods and makes them faster to use
+Browserki.js is a customisable and lightweight mini library (3kb minified) I created for use in small to medium sized web projects were I wasn't using any bigger libraries like jQuery to make things like getting elements and handling classes and events cross-browser faster and easier.
 
-Browserkit is a customisable and lightweight mini library (3kb minified) for small to medium sized web projects which can help save loads of time by making things like getting elements and handling classes and events fast and easy (cross-browser).
+It allows you to remove methods you don't use easily so your users only load methods that are actually being used.
 
-When your project is ready to go live you can remove the methods you don't use from Browserkit easily so your users only load what is actually being used.
-
-**Browser support:** All that have been tested so far including IE6 and Android 1.5.
+**Browser support:** All that have been tested so far including IE6 and Android 1.5. *Still need to run some more browsertests in older and mobile browsers*
 
 *Feedback is always welcome. Let me know what you think or if you notice anything. :)*
 
@@ -68,17 +66,17 @@ And elements can easily be selected using the `el` variable:
 
 Methods are polyfilled in their original object, which means they are available from anywhere in your code, in any browser supported by Browserkit! ;)
 
-* document.querySelector
+* document.querySelector *does currently only support selector + id/class or one of the two*
 * document.getElementsByClassName
 * Array.indexOf
 
 
 ##Customisation
 
-###Changing the Browserkit variable
+###Changing the `B` variable
 The Browserkit object is by default stored in a variable named `B` which can easily be changed at the bottom of the Browserkit.js file.
 
-###Removing functionality
+###Removing methods
 Browserkit allows you to easily remove what you don't use to make the file as small as possible before your web project goes live.
 
-Note that when removing methods you don't need you should make sure not to remove methods other methods you do need are using. You can find out if any other methods are using it by simply doing a quick search for the method name.
+Note that when removing methods you should make sure not to remove methods other methods you do need are using. You can find out if any other methods are using the one you are about to remove by simply doing a search throughout the file for the method name.
