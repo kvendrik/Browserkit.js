@@ -7,7 +7,7 @@ Browserkit is a customisable and lightweight mini library (3kb minified) for sma
 
 When your project is ready to go live you can remove the methods you don't use from Browserkit easily so your users only load what is actually being used.
 
-**Browser support:** All that have been tested so far including IE6 and Android 1.5.
+**Browser support:** Full browser support can not be guaranteed at this time. Browserkit.js will release in a later stage with browser support reaching until IE6.
 
 *Feedback is always welcome. Let me know what you think or if you notice anything. :)*
 
