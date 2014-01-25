@@ -5,7 +5,7 @@ Browserkit.js is a customisable and lightweight mini library (3kb minified) I cr
 
 It allows you to remove methods you don't use easily so your users only load methods that are actually being used.
 
-**Browser support:** All that have been tested so far including IE6 and Android 1.5. *Still need to run some more browsertests in older and mobile browsers*
+**Browser support:** Full browser support can not be guaranteed at this time. Browserkit.js will release in a later stage with browser support reaching until IE6.
 
 *Feedback is always welcome. Let me know what you think or if you notice anything. :)*
 
