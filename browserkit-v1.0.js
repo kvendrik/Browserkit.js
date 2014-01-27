@@ -23,13 +23,13 @@ if(typeof Array.prototype.indexOf !== 'function'){
 
 		return -1;
 
-	}
+	};
 
 }
 
 
 //document.querySelector
-//if(typeof document.querySelector !== 'function'){
+if(typeof document.querySelector !== 'function'){
 
 	document.querySelector = function(elQuery){
 
@@ -111,7 +111,7 @@ if(typeof Array.prototype.indexOf !== 'function'){
 
 	};
 
-//}
+}
 
 
 //document.getElementsByClassName
@@ -150,14 +150,14 @@ if(typeof document.getElementsByClassName !== 'function'){
 
 	this.Browserkit = function(el){
 
-		if(this === window){
+		if(this === window || typeof this._ClassesBase !== 'function'){
 
 			return new Browserkit(el);
 
 		} else {
 
-			var elType = typeof el;
-
+			var elType = typeof el,
+			el;
 			if(elType === 'object'){
 
 				this.el = el;
@@ -286,17 +286,27 @@ if(typeof document.getElementsByClassName !== 'function'){
 	////////EVENTS - CUSTOM HANDLERS////////
 
 	//CLICK (uses google fastbutton)
-	this.Browserkit.prototype.click = function(handler){
+	//import google fastbutton before Browserkit.js
+	//if not Browserkit won't find the FastButton Object
+	if(typeof window.FastButton === 'function'){
 
-		if(typeof window.FastButton === 'function'){
+		this.Browserkit.prototype.click = function(handler){
+
 			new FastButton(this.el, handler);
-		} else {
+			return this;
+
+		};
+
+	} else {
+
+		this.Browserkit.prototype.click = function(handler){
+
 			this.addEvent('click', handler);
-		}
+			return this;
 
-		return this;
+		};
 
-	};
+	}
 
 
 	//RESIZE END
