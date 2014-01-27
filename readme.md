@@ -3,11 +3,11 @@ Browserkit.js
 
 Browserkit.js is a customisable and lightweight mini library (3kb minified) I created for use in small to medium sized web projects were I'm not using any bigger libraries like jQuery to make things like getting elements and handling classes and events cross-browser faster and easier.
 
-It allows you to remove methods you don't use easily so your users only load methods that are actually being used.
+It allows you to remove methods you don't need easily so your users only load what they actually need.
 
 When your project is ready to go live you can remove the methods you don't use from Browserkit easily so your users only load what is actually being used.
 
-####Browser support
+###Browser support
 All browsers tested so far, including:
 
 **Desktop:** IE5(IE10 document mode), IE6+, Firefox 3+, Safari 4+, Chrome 14+, Opera 10.6+.
