@@ -9,8 +9,10 @@ When your project is ready to go live you can remove the methods you don't use f
 
 ####Browser support
 All browsers tested so far, including:
+
 **Desktop:** IE5(IE10 document mode), IE6+, Firefox 3+, Safari 4+, Chrome 14+, Opera 10.6+.
-**Mobile:** iOS 3+, Android 1.5+, Opera Mobile
+
+**Mobile:** iOS 3+, Android 1.5+, Opera Mobile.
 
 *Feedback is always welcome. Let me know what you think or if you notice anything. :)*
 
