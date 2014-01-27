@@ -8,7 +8,7 @@ It allows you to remove methods you don't need easily so your users only load wh
 When your project is ready to go live you can remove the methods you don't use from Browserkit easily so your users only load what is actually being used.
 
 ###Browser support
-All browsers tested so far, including:
+All browsers tested so far are supported, including:
 
 **Desktop:** IE5(IE10 document mode), IE6+, Firefox 3+, Safari 4+, Chrome 14+, Opera 10.6+.
 
