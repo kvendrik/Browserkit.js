@@ -1,6 +1,8 @@
 Browserkit.js
 =============
 
+**Check out the full documentation [on the website](http://browserkitjs.com)**
+
 Browserkit.js is a customisable and lightweight mini library (3kb minified) I created for use in small to medium sized web projects were I'm not using any bigger libraries like jQuery to make things like getting elements and handling classes and events cross-browser faster and easier.
 
 It allows you to remove methods you don't need easily so your users only load what they actually need.
@@ -40,50 +42,3 @@ And elements can easily be selected using the `el` variable:
 	var kittenArea = B('section.kitten').el;
 
 *Note: Selecting elements using `document.querySelector`(which Browserkit polyfills) is currently faster than using the `el` variable*
-
-
-##Features
-
-###Methods
-
-####Classes
-
-| Method      | Arguments   |
-|-------------|:-----------:|
-| addClass    | *('class')* |
-| removeClass | *('class')* |
-| toggleClass | *('class')* |
-
-####Events
-
-| Method      | Arguments              |
-|-------------|:----------------------:|
-| addEvent    | *('event', handler())* |
-| detachEvent | *('event', handler())* |
-
-####Custom events
-
-| Method      | Arguments     | Notes |
-|-------------|:-------------:|:-----:|
-| click       | *(handler())* | Uses (Google) [FastButton](https://github.com/kvendrik/google_fastbutton/blob/master/google-fastbutton.js) in case it exists |
-| resizeEnd   | *(handler())* |
-
-
-###Polyfills
-
-Methods are polyfilled in their original object, which means they are available from anywhere in your code, in any browser supported by Browserkit! ;)
-
-* document.querySelector *does currently only support selector + id/class or one of the two*
-* document.getElementsByClassName
-* Array.indexOf
-
-
-##Customisation
-
-###Changing the `B` variable
-The Browserkit object is by default stored in a variable named `B` which can easily be changed at the bottom of the Browserkit.js file.
-
-###Removing methods
-Browserkit allows you to easily remove what you don't use to make the file as small as possible before your web project goes live.
-
-Note that when removing methods you should make sure not to remove methods other methods you do need are using. You can find out if any other methods are using the one you are about to remove by simply doing a search throughout the file for the method name.
