@@ -3,11 +3,13 @@ Browserkit.js
 
 **Check out the full documentation [on the website](http://browserkitjs.com)**
 
-Browserkit.js is a customisable and lightweight mini library (3kb minified) I created for use in small to medium sized web projects were I'm not using any bigger libraries like jQuery to make things like getting elements and handling classes and events cross-browser faster and easier.
+Browserkit.js is a **customisable and lightweight mini library**. I created Browserkitjs for use in small to medium sized web projects were I wasn't using any bigger libraries like jQuery. It makes things like getting elements and handling classes and events cross-browser much faster and easier.</p>
 
-It allows you to remove methods you don't need easily so your users only load what they actually need.
+A very important aspect of Browserkitjs is that you can **remove what you don't need**, in contrast to bigger 
+libraries like were your end user loads a lot of methods they don't need.
+This way your end-user will only load what is actually being used on the page and nothing else.
 
-When your project is ready to go live you can remove the methods you don't use from Browserkit easily so your users only load what is actually being used.
+[Get started!](http://browserkitjs.com/docs/setup)
 
 ###Browser support
 All browsers tested so far are supported, including:
@@ -41,4 +43,4 @@ And elements can easily be selected using the `el` variable:
 
 	var kittenArea = B('section.kitten').el;
 
-*Note: Selecting elements using `document.querySelector`(which Browserkit polyfills) is currently faster than using the `el` variable*
+*Note that selecting elements using `document.querySelector`(which Browserkit polyfills) is currently faster than using the `el` variable*
