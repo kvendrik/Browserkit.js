@@ -1,0 +1,95 @@
+* {
+	margin: 0;
+	padding: 0;
+	line-height: @line-height;
+	-webkit-font-smoothing: antialiased;
+	
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+body {
+	font: @main-size @main-family;
+	font-weight: @main-weight;
+	color: @base-color;
+	border-top: solid @border-size;
+	.accentBorderColor;
+
+	width: 100%;
+
+	-webkit-transition: margin-left .2s ease-in-out;
+	   -moz-transition: margin-left .2s ease-in-out;
+	     -o-transition: margin-left .2s ease-in-out;
+	        transition: margin-left .2s ease-in-out;
+
+	&.pushed-left {
+		margin-left: -200px;
+	}
+}
+
+noscript {
+	display: block;
+
+	padding: @padding-m;
+	margin-bottom: @margin-xl;
+
+	font-weight: bold;
+	text-align: left;
+	color: @white;
+	
+	.accentBgColor;
+}
+
+:-moz-placeholder,
+:-ms-input-placeholder {
+	color: @grey-1;
+}
+
+::selection,
+::-moz-selection {
+	color: @white;
+	.accentBgColor;
+}
+
+.cf-top {
+	margin-top: 0;
+}
+
+.cf-btm {
+	margin-bottom: 0;
+}
+
+.c-top {
+	margin-top: @margin-l;
+}
+
+.mobile-only {
+	display: none !important;
+}
+
+/* GENERAL */
+
+body div.container {
+	width: @container-width;
+	margin: @margin-l auto @margin-l auto;
+	overflow: hidden;
+}
+
+section, footer {
+	overflow: hidden;
+}
+
+header {
+	margin-bottom: @margin-m;
+}
+
+header a,
+footer a {
+	color: @base-color;
+	border: none;
+
+	&:hover {
+		.accentColor;
+	}
+}
