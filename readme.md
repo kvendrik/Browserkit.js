@@ -5,7 +5,7 @@ Browserkit.js was created for use in small to medium sized web projects were I w
 
 Why I use my own library? Because every code has it's pros and cons, native JavaScript does and so do jQuery and Browserkit.js.
 
-The advantige of using my own library is that whenever I find out about something I'd like to improve I can throw a fix in Browserkit.js so my future projects will include these improvements.
+The advantige of using my own library is that whenever I find out about something I'd like to improve I can throw a fix in Browserkit.js so future projects will include these improvements.
 
 ###Can I Use This?
 In case you're interested in using Browserkit.js and wondering if you can and if its stable, the answer is; yes you can and yes it is. The root contains all the stable versions. The unstable version that is under development can be found in de _dev > sandbox folder.
