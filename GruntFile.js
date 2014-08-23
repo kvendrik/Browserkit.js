@@ -38,7 +38,7 @@ module.exports = function (grunt)
 		    },
 		    alldev: {
 		      files: {
-		        'tests/<%= pkg.name %>-dev.min.js': 'test-area/<%= pkg.name %>-dev.js'
+		        'tests/<%= pkg.name %>-dev.min.js': 'tests/<%= pkg.name %>-dev.js'
 		      }
 		    },
 		    filtered: {
@@ -83,15 +83,69 @@ module.exports = function (grunt)
 	grunt.registerTask('deploy', ['concat:all','uglify:alldist']); //generates file in tests/ and then uglifies from there to dist/
 	grunt.registerTask('custom', ' Build Browserkit by choosing the methods you need like e.g. `grunt custom:ajax,classes,eventslisteners` ', function(options){
 		var optionsArr = options.split(','),
-			incFilesArr = ['src/polyfills/*.js', 'src/init.js'];
 
+			//create array to store what files to import
+			//along with the files to prepend
+			incFilesArr = ['src/polyfills/*.js', 'src/init.js'],
+
+			//All methods and their dependencies
+			methodDependencies = {
+				'custom-eventlisteners': ['eventlisteners']
+			};
+
+		//loop through all specified methods
 		for(var i = 0, count = optionsArr.length; i < count; i++){
-			incFilesArr.push( 'src/methods/'+optionsArr[i]+'.js' );
+
+			var method = optionsArr[i]; //method filename
+
+			//check if method exists
+			if(!grunt.file.exists('src/methods/'+method+'.js')) grunt.fail.warn('`'+method+'` method does not exist');
+
+			var dependencies = methodDependencies[method];
+
+			//check if method has dependencies
+			if(dependencies !== undefined){
+
+				//loop through dependencies
+				for(var j = 0, depCount = dependencies.length; j < depCount; j++){
+					var currDep = dependencies[j];
+
+					//push dependency into files to include array
+					//if they're not already there
+					if(incFilesArr.indexOf('src/methods/'+currDep+'.js') === -1){
+
+						//check if dependency exists
+						if( grunt.file.exists('src/methods/'+currDep+'.js') ){
+
+							incFilesArr.push( 'src/methods/'+currDep+'.js' );
+							grunt.log.writeln('`'+currDep+'` dependency added');
+						} else {
+							grunt.fail.warn('`'+currDep+'` dependency does not exist');
+						}
+					}
+
+				}
+
+			}
+
+			//push method into files to include array
+			incFilesArr.push( 'src/methods/'+method+'.js' );
+			grunt.log.ok('`'+method+'` method added');
+
 		}
+
+		//append footer
 		incFilesArr.push('src/footer.js');
 
+		//set files to include array as variable
 		grunt.config.set('concat.methodsToInc', incFilesArr);
-		grunt.task.run(['concat:filtered','uglify:filtered','shell:rmCustomConcat']); //generates concat to dist/ then uglifies that file and deletes to unuglified file
+
+		//concat to dist/ then uglify that file and delete to unuglified file
+		grunt.task.run(['concat:filtered','uglify:filtered','shell:rmCustomConcat']);
+
+		grunt.log.writeln();
+		grunt.log.writeln('temporary file deleted');
+		grunt.log.ok('custom build created in dist/');
 	});
 
 }
