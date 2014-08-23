@@ -1,4 +1,0 @@
-#Rewrite URL
-
-RewriteEngine On
-RewriteRule ^([a-zA-Z]+)(/([a-zA-Z\-]+))?$ $1.php?docs-page=$3

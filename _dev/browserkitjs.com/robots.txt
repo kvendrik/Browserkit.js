@@ -1,1 +1,0 @@
-Sitemap: http://www.browserkitjs.com/sitemap.xml

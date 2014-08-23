@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Browserkit</title>
+<style>
+	#test-results {
+		width: 100%;
+		margin-bottom: 80px;
+		border: solid 1px #444;
+		padding: 20px;
+	}
+
+	#test-results .success {
+		color: green;
+	}
+
+	#test-results .error {
+		color: red;
+	}
+</style>
+</head>
+<body>
+
+<p id="test-results"></p>
+
+	<div id='elid' class='hithere'>Hello</div>
+
+	<section class='area area2'>
+
+		<article id='article' class='column hithere'></article>
+		<article id='article' class='column hithere'></article>
+
+	</section>
+
+	<p class='somep'>somep</p>
+
+	<p class='selection-test'>P1</p>
+	<p class='selection-test'>P2</p>
+	<p class='selection-test'>P3</p>
+	<p class='selection-test'>P4</p>
+
+	<form id='form' action='#' method='post'>
+		<label>I like...</label>
+		<input type='text' name='i-like' value='Kittens!' />
+		<label>Do you?</label>
+		<input type='checkbox' name='do-you' value='yes' checked />
+		<label>This one? - </label>
+		<label>yes</label>
+		<input type='radio' name='this-one' value='yep' checked />
+		<label>no</label>
+		<input type='radio' name='this-one' value='nope' />
+		<label>Some comments on that?</label>
+		<textarea name='some-comments'>Yeah i have some</textarea>
+
+		<input type='submit' value='Post' />
+	</form>
+
+	<div id="howareya">How are ya?</div>
+
+<script src='browserkit-dev.js'></script>
+<script>
+
+	if(console === undefined){
+		var console = {};
+		console.log = function(msg){
+			alert(msg);
+		}
+	}
+
+	var passed = 0,
+		errors = 0;
+	var log = function(msg){
+		B('#test-results')[0].innerHTML += msg;
+	}, test = function(name, test){
+		if(test === true){
+			log(name+': '+'<span class="success">Success</span>'+'<br>');
+			passed++;
+		} else {
+			log(name+': '+'<span class="error">Error</span>'+'<br>');
+			errors++;
+		}
+	};
+
+	//test objects
+	var arr = ['Hi','There','How','Are','Ya'],
+	obj = {
+		name: 'Koen',
+		age: 19,
+		city: 'Nijmegen'
+	},
+	defaults = {
+		max: 12,
+		min: 45
+	},
+	settings = {
+		max: 90
+	};
+
+	document.title = 'Running tests...';
+
+	//Selector
+	log('Selector<br>');
+	test('Selector', B('.selection-test')[0].nodeType === 1);
+
+	//Classes
+	log('<br><br>Classes<br>');
+	test('addClass', (B('.somep').addClass('add')[0].className === 'somep add') );
+	test('toggleClass', (B('.somep').toggleClass('toggle')[0].className === 'somep add toggle') );
+	test('removeClass', (B('.somep').removeClass('toggle')[0].className === 'somep add') );
+
+	//Events
+	log('<br><br>Events<br>');
+	var onC = function(){ console.log('.somep event'); };
+	test('Events/on', ( typeof B('.somep').on('click', onC) === 'object' ) );
+	test('Events/off', ( typeof B('.somep').off('click', onC) === 'object' ) );
+
+	test('Events/click', ( typeof B('.somep').click(onC) === 'object' ) );
+	test('Events/resizeEnd', ( typeof B(window).resizeEnd(onC) === 'object' ) );
+
+	//Each
+	log('<br><br>Each<br>');
+	test('Each', typeof ( B('.selection-test').each(function(i){ i.setAttribute('style','color:red;'); }) ) === 'object' );
+
+	//JS Each
+	log('<br><br>JS Each<br>');
+	test('JS Each', typeof ( B.each(arr,function(i){ document.body.innerHTML += i; }).each(obj,function(i){ document.body.innerHTML += i;  }) ) === 'function' );
+
+	//Object Merge
+	log('<br><br>Object Merge<br>');
+	test('Object Merge', typeof B.merge([defaults,settings]) === 'object' );
+
+	//Serialize Form
+	log('<br><br>Serialize Form<br>');
+	log( B('#form').serialize()+'<br>');
+	test('Serialize Form', ( B('#form').serialize() === '=Post&this-one=yep&do-you=yes&i-like=Kittens!&some-comments=Yeah i have some' ) );
+
+	//Get JSON
+	B.getJSON('lib/get.json', function(data){
+		log('<br><br>getJSON<br>');
+		test('getJSON', typeof data === 'object' );
+	});
+
+	//Serialize Form
+	var i = 0;
+	log('<br><br>setInterval<br>');
+	test('setInterval', B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 8000) === 1 );
+
+	B.ajax({
+		url: 'lib/post.php',
+		data: 'didwork=true',
+		type: 'post',
+		dataType: 'json',
+		success: function(data){
+			log('<br><br>AJAX<br>');
+			log(JSON.stringify(data)+'<br>');
+			test('AJAX', typeof data === 'object' );
+		}
+	});
+
+	setTimeout(function(){
+		document.title = passed+' passed and '+errors+' errors occured';
+	},2000);
+
+/* NOTES---->
+
+* document.querySelector in IE8 does not take HTML5 tags, it will return null
+* ( document.body.innerHTML += ) will result in the document not registering event listeners anymore
+
+<------*/
+
+</script>
+
+</body>
+</html>
