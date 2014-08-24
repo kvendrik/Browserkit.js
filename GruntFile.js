@@ -4,9 +4,6 @@ module.exports = function (grunt)
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
-		meta: {
-			today: grunt.template.today('dd-mm-yyyy')
-		},
 		connect: {
 			server: {
 				options: {
@@ -23,27 +20,22 @@ module.exports = function (grunt)
 			},
 			all: {
 				src: ['src/polyfills/*.js', 'src/init.js', 'src/methods/*.js', 'src/footer.js'],
-				dest: 'tests/<%= pkg.name %>-dev.js'
+				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
 			},
 			filtered: {
 				src: '<%= concat.methodsToInc %>',
-				dest: 'dist/<%= pkg.name %>-temp.custom.js'
+				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>-temp.custom.js'
 			}
 		},
 		uglify: {
-		    alldist: {
+		    all: {
 		      files: {
-		        'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': 'test-area/<%= pkg.name %>-dev.js'
-		      }
-		    },
-		    alldev: {
-		      files: {
-		        'tests/<%= pkg.name %>-dev.min.js': 'tests/<%= pkg.name %>-dev.js'
+		        'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
 		      }
 		    },
 		    filtered: {
 		      files: {
-		        'dist/<%= pkg.name %>-<%= pkg.version %>.custom.min.js': 'dist/<%= pkg.name %>-temp.custom.js',
+		        'dist/<%= pkg.name %>-<%= pkg.version %>.custom.min.js': 'dist/<%= pkg.name %>-<%= pkg.version %>-temp.custom.js',
 		      }
 		    }
   		},
@@ -77,11 +69,10 @@ module.exports = function (grunt)
 	//testing
 	grunt.registerTask('serve', ['connect', 'watch']);
 	grunt.registerTask('merge', ['concat:all']);
-	grunt.registerTask('mergemin', ['concat:all','uglify:alldev']); //generates file in tests/ and then uglifies from there to dist/
+	grunt.registerTask('mergemin', ['jshint','concat:all','uglify:all']); //generates file in dist/ and then uglifies
 
 	//distribute
-	grunt.registerTask('deploy', ['concat:all','uglify:alldist']); //generates file in tests/ and then uglifies from there to dist/
-	grunt.registerTask('custom', ' Build Browserkit by choosing the methods you need like e.g. `grunt custom:ajax,classes,eventslisteners` ', function(options){
+	grunt.registerTask('custom', 'Custom build Browserkit by choosing the methods you need like e.g. `grunt custom:ajax,classes,eventslisteners`', function(options){
 		var optionsArr = options.split(','),
 
 			//create array to store what files to import
