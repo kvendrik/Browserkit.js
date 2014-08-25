@@ -20,7 +20,7 @@ module.exports = function (grunt)
 			},
 			all: {
 				src: ['src/polyfills/*.js', 'src/init.js', 'src/methods/*.js', 'src/footer.js'],
-				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
+				dest: 'tests/<%= pkg.name %>-<%= pkg.version %>.js'
 			},
 			filtered: {
 				src: '<%= concat.methodsToInc %>',
@@ -30,7 +30,7 @@ module.exports = function (grunt)
 		uglify: {
 		    all: {
 		      files: {
-		        'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
+		        'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': 'tests/<%= pkg.name %>-<%= pkg.version %>.js'
 		      }
 		    },
 		    filtered: {
