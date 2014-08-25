@@ -58,7 +58,8 @@
 
 	<div id="howareya">How are ya?</div>
 
-<script src='browserkit-1.2.0.js'></script>
+<script src='browserkit-1.0.0.js'></script>
+<script src="//code.jquery.com/jquery.min.js"></script>
 <script>
 
 	if(console === undefined){
@@ -128,22 +129,22 @@
 	test('Each', typeof ( B('.selection-test').each(function(i){ i.setAttribute('style','color:red;'); }) ) === 'object' );
 
 	//JS Each
-	log('<br><br>JS Each<br>');
+	log('<br><br>forEach<br>');
 	var forEachOutput = '';
 	B.forEach([21,22,23], function(val, idx, arr){
 		forEachOutput += ' | '+arr+'['+idx+'] = '+val;
 	});
-	test('JS Each (Array)', forEachOutput === ' | 21,22,23[0] = 21 | 21,22,23[1] = 22 | 21,22,23[2] = 23');
+	test('forEach (Array)', forEachOutput === ' | 21,22,23[0] = 21 | 21,22,23[1] = 22 | 21,22,23[2] = 23');
 
 	forEachOutput = '';
 	B.forEach({name: 'Koen',age: 19}, function(val, idx, obj){
 		forEachOutput += ' | '+obj+'['+idx+'] = '+val;
 	});
-	test('JS Each (Object)', forEachOutput === ' | [object Object][name] = Koen | [object Object][age] = 19');
+	test('forEach (Object)', forEachOutput === ' | [object Object][name] = Koen | [object Object][age] = 19');
 
-	//Object Merge
-	log('<br><br>Object Merge<br>');
-	test('Object Merge', typeof B.merge([defaults,settings]) === 'object' );
+	//Object extend
+	log('<br><br>Object Extend<br>');
+	test('Object Extend',  JSON.stringify( B.extend({name:85,city:'Nijmegen'},{name:21},{name:55,age:21}) ) === '{"name":55,"city":"Nijmegen","age":21}' );
 
 	//Serialize Form
 	log('<br><br>Serialize Form<br>');
@@ -155,11 +156,6 @@
 		log('<br><br>getJSON<br>');
 		test('getJSON', typeof data === 'object' );
 	});
-
-	//Serialize Form
-	var i = 0;
-	log('<br><br>setInterval<br>');
-	test('setInterval', B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 8000) === 1 );
 
 	B.ajax({
 		url: 'lib/post.php',
@@ -173,7 +169,14 @@
 		}
 	});
 
+	var i = 0;
+	B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
+
 	setTimeout(function(){
+		//setInterval
+		log('<br><br>setInterval<br>');
+		test('setInterval', i === 4 );
+
 		document.title = passed+' passed and '+errors+' errors occured';
 	},2000);
 

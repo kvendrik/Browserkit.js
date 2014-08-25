@@ -3,22 +3,30 @@ Browserkit.js
 
 Browserkit.js is a small JavaScript library that makes some of the things that you use frequently in JavaScript easier and faster.
 
-Why you should use Browserkit? I'm not saying you should. Every library has its pros and cons, my goal for Browserkit is to create a library that helps create high quality projects.
+Why you should use Browserkit? I'm not saying you should. Every library has its pros and cons, my goal for Browserkit is to create a library that helps create high quality projects faster and easier.
 
 To do this I try to identify the things I find myself doing frequently, then make a method to be able to to it quicker and then optimise the code using benchmarks to try to get the best performance out of it.
 
 ## What versions can I use?
 Browserkit.js has stable versions and unstable ones. The stable versions have been browser tested and benchmarked and the unstable ones are versions that can for example contain untested new methods.
 
-In case you're interested in using Browserkit I recommand you keep a local copy of a stable version. The newest stable version can be found in the [releases](https://github.com/kvendrik/Browserkit.js/tree/master/releases) folder. The unstable versions of the library can be found in de [_dev > sandbox folder](https://github.com/kvendrik/Browserkit.js/tree/master/_dev/sandbox).
+In case you're interested in using Browserkit I recommand you keep a local copy of a stable version. The newest stable version can be found in the master branch. The unstable version of the library lives in the develop branch.
 
 
 ## Browser support
-At the top of every Browserkit file you'll find notes. In these notes you can find information including all the tested and theirfor supported browsers for that specific release.
+The stable version of Browserkit is tested the following browsers:
+* Opera: 17, 20
+* Chrome: 22, 30
+* Safari: 5.1
+* FF: 22, 27
+* IE: 8, 9, 10
+* Android: 2.3, 4.0, 4.1, 4.2
+* iOS: 6, 7
+* Opera Mobile
 
 
 ## Usage
-1. Grab the code of one of the releases and save it as a local copy
+1. Grab the code from the dist/ folder and save it as a local copy
 2. Include it in your project
 ````
 <script src='browserkit.min.js'></script>
@@ -26,19 +34,20 @@ At the top of every Browserkit file you'll find notes. In these notes you can fi
 
 ## Syntax
 Browserkit uses a syntax that is quite simular to other libraries:
-
-    B('.kitten').addClass('is-cute');
-
+```
+B('.kitten').addClass('is-cute');
+```
 Also chaining is possible:
-
-	B('.kitten').addClass('has-bal').removeClass('is-mean').click(function(){
-		alert('Awh, thats cute!');
-	});
+```
+B('.kitten').addClass('has-bal').removeClass('is-mean').click(function(){
+	alert('Awh, thats cute!');
+});
+```
 
 Elements can easily be selected using their index:
-
-	var el = B('.kitten')[0];
-
+```
+B('.kitten')[0];
+```
 
 ## Performance
 Below you'll find some benchmarks done with Browserkit for your consideration
@@ -49,6 +58,18 @@ Below you'll find some benchmarks done with Browserkit for your consideration
 
 
 ## Methods
+
+#### find(*selector*)
+Finds a element inside the element specified in `B()`.
+
+**selector** *(string)* <br>
+A CSS selector. The selector works the fastest when only specifing a class or tag name.
+
+```
+B('.area').find('article');
+```
+
+---
 
 #### addClass(*class*)
 Adds a class to a HTML element
@@ -123,8 +144,8 @@ Function to run on each iteration. Accepts parameter it sends to current element
 
 **Example**
 ``````
-B('.kitten').each(function(i){
-	i.setAttribute('style', 'color: green');
+B('.kitten').each(function(el){
+	el.setAttribute('style', 'color: green');
 });
 ``````
 
@@ -164,32 +185,44 @@ Callback function. Accepts parameter it binds the data to.
 
 ---
 
-#### B.each(*object*, *handler*)
+#### B.forEach(*object*, *handler*)
 Loop through all the properties or indexes in an array or object
 
+**object** *(object/array)*
+Object or array to loop through
+
 **handler** *(function)* <br>
-Function to run on each iteration. Accepts parameter it sends to current property or index to.
+Function to run on each iteration. Accepts three parameters: `value` to which the current value is send, `index` to which the current index or property is send and `object` to which the array or object that is currently being looped through is send.
+
+Those specific parameters are there because for arrays the function uses the native `Array.prototype.forEach`. For objects it uses a custom solution.
 
 **Example**
 ``````
-B.each({ name: "Koen", age: 20 }, function(i){
-	console.log(i, { name: 'Koen', age: 20 }[i]);
-	//name Koen
+B.each({ name: "Koen", age: 20 }, function(value, property, object){
+	console.log(object+'["'+property+'"] = '+value);
+	//{ name: "Koen", age: 20 }["name"] = "Koen"
+	//{ name: "Koen", age: 20 }["age"] = 20
 });
 ``````
 
 ---
 
-#### B.merge(*objects*)
-Merges an array of objects and returns the resulting object
+#### B.extend(*targetObject*, *object1*, *objectN*)
+Extends an object with one or multiple other objects
 
-**objects** *(array)* <br>
-Array of objects that should be merged
+**targetObject** *(array)* <br>
+The object that is extended.
+
+**object1** *(object)*
+Object to extend the `targetObject` with.
+
+**objectN** *(object)*
+An unlimited number of other objects to also extend the `targetObject` with.
 
 **Example**
 ``````
-B.merge( [{ name: "Koen", age: 20 },{ city: "Nijmegen" }, { age: 25 }] );
-//{ name: "Koen", age: 25, city: "Nijmegen" }
+B.extend({name: 85, city: 'Nijmegen'}, {name: 21}, {name: 55, age: 21});
+//{"name": 55, "city": "Nijmegen", "age": 21}
 ``````
 
 ---
@@ -198,7 +231,7 @@ B.merge( [{ name: "Koen", age: 20 },{ city: "Nijmegen" }, { age: 25 }] );
 A safer alternative to the native setInterval function. Have a look over [here](http://zetafleet.com/blog/why-i-consider-setinterval-harmful) for more info on why this is necessary.
 
 **handler** *(function)* <br>
-A function to run after the given delay
+A function to run each time after the given delay
 
 **delay** *(number)* <br>
 The delay in milliseconds
