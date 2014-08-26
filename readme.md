@@ -1,4 +1,4 @@
-Browserkit.js
+Browserkit.js ![Travis Build Status](https://travis-ci.org/kvendrik/Browserkit.js.svg?branch=master)
 =============
 
 Browserkit.js is a small JavaScript library that makes some of the things that you use frequently in JavaScript easier and faster.
