@@ -19,7 +19,7 @@ module.exports = function (grunt)
 				separator: "\n\n"
 			},
 			all: {
-				src: ['src/polyfills/*.js', 'src/init.js', 'src/methods/*.js', 'src/footer.js'],
+				src: ['src/init.js', 'src/methods/*.js', 'src/footer.js'],
 				dest: 'tests/<%= pkg.name %>-<%= pkg.version %>.js'
 			},
 			filtered: {
@@ -49,7 +49,7 @@ module.exports = function (grunt)
 			    livereload: true,
 			},
 		  	js: {
-		  		files: ['src/polyfills/*.js', 'src/init.js', 'src/methods/*.js', 'src/footer.js'],
+		  		files: ['src/init.js', 'src/methods/*.js', 'src/footer.js'],
 		  		tasks: ['concat:all']
 		  	}
 		},
@@ -96,7 +96,7 @@ module.exports = function (grunt)
 
 			//create array to store what files to import
 			//along with the files to prepend
-			incFilesArr = ['src/polyfills/*.js', 'src/init.js'],
+			incFilesArr = ['src/init.js'],
 
 			//All methods and their dependencies
 			methodDependencies = {

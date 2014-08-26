@@ -70,33 +70,20 @@
 	}
 
 	var passed = 0,
-		errors = 0;
-	var log = function(msg){
-		B('#test-results')[0].innerHTML += msg;
-	}, test = function(name, test){
-		if(test === true){
-			log(name+': '+'<span class="success">Success</span>'+'<br>');
-			passed++;
-		} else {
-			log(name+': '+'<span class="error">Error</span>'+'<br>');
-			errors++;
-		}
-	};
+		errors = 0,
+		log = function(msg){
+			B('#test-results')[0].innerHTML += msg;
+		}, test = function(name, test){
+			if(test === true){
+				log(name+': '+'<span class="success">Success</span>'+'<br>');
+				passed++;
+			} else {
+				log(name+': '+'<span class="error">Error</span>'+'<br>');
+				errors++;
+			}
+		};
 
 	//test objects
-	var arr = ['Hi','There','How','Are','Ya'],
-	obj = {
-		name: 'Koen',
-		age: 19,
-		city: 'Nijmegen'
-	},
-	defaults = {
-		max: 12,
-		min: 45
-	},
-	settings = {
-		max: 90
-	};
 
 	document.title = 'Running tests...';
 

@@ -8,7 +8,7 @@ Why you should use Browserkit? I'm not saying you should. Every library has its 
 To do this I try to identify the things I find myself doing frequently, then make a method to be able to to it quicker and then optimise the code using benchmarks to try to get the best performance out of it.
 
 ## What versions can I use?
-Browserkit.js has stable versions and unstable ones. The stable versions have been browser tested and benchmarked and the unstable ones are versions that can for example contain untested new methods.
+Browserkit.js has stable versions and unstable ones. The stable versions have been browser tested and the unstable ones are versions that can for example contain untested new methods.
 
 In case you're interested in using Browserkit I recommand you keep a local copy of a stable version. The newest stable version can be found in the master branch. The unstable version of the library lives in the develop branch.
 
@@ -32,7 +32,7 @@ The stable version of Browserkit is tested the following browsers:
 <script src='browserkit.min.js'></script>
 ````
 
-Next to using the whole library it is also possible to create custom builds. For more info on how to do this please have a look at the [Custom Builds](#custom-builds) section of this page.
+Next to using the whole library it is also possible to create custom builds that only include the methods you need for a particular project. For more info on how to do this please have a look at the [Custom Builds](#custom-builds) section of this page.
 
 ## Syntax
 Browserkit uses a syntax that is quite simular to other libraries:
@@ -64,7 +64,7 @@ Below you'll find some benchmarks done with Browserkit for your consideration
 Finds a element inside the element specified in `B()`.
 
 **selector** *(string)* <br>
-A CSS selector. The selector works the fastest when only specifing a class or tag name.
+A CSS selector. The selector works the fastest when only specifing a class or tag name and not both.
 
 ```
 B('.area').find('article');
@@ -97,18 +97,18 @@ The class you'd like to toggle
 ---
 
 #### on(*event*, *handler*)
-Adds a event listener to a HTML element
+Adds an event listener to a HTML element
 
 **event** *(string)* <br>
 Name of the event you'd like to listen on
 
 **handler** *(function)* <br>
-Handler for after the event emitted
+Handler for when the event triggers
 
 ---
 
 #### off(*event*, *handler*)
-Removes a event listener from a HTML element
+Removes an event listener from a HTML element
 
 **event** *(string)* <br>
 Name of the event you'd like to remove the listener from
@@ -122,7 +122,7 @@ Handler of the original event listener
 Adds a click event listener to a HTML element
 
 **handler** *(function)* <br>
-Handler for after the click emitted
+Handler for when the element is clicked
 
 **Notes** <br>
 Uses Google fastbutton if `window.FastButton` is found on page load
@@ -130,7 +130,7 @@ Uses Google fastbutton if `window.FastButton` is found on page load
 ---
 
 #### resizeEnd(*handler*)
-Adds a resizeEnd event listener to an element
+Adds a resizeEnd event listener to an element (usually `window`)
 
 **handler** *(function)* <br>
 Handler for when the resize ends
@@ -138,7 +138,7 @@ Handler for when the resize ends
 ---
 
 #### each(*handler*)
-Loop through all the found elements
+Loops through all the found HTML elements and invokes the handler on each iteration
 
 **handler** *(function)* <br>
 Function to run on each iteration. Accepts parameter it sends to current element to.
@@ -184,12 +184,22 @@ Url to the file you'd like to receive the JSON from
 **handler** *(function)* <br>
 Callback function. Accepts parameter it binds the data to.
 
+**Notes**
+Basically a shorthand for:
+```
+B.ajax({
+	dataType: 'json',
+	url: url,
+	success: handler
+});
+```
+
 ---
 
 #### B.forEach(*object*, *handler*)
 Loop through all the properties or indexes in an array or object
 
-**object** *(object/array)*
+**object** *(object/array)* <br>
 Object or array to loop through
 
 **handler** *(function)* <br>
@@ -214,10 +224,10 @@ Extends an object with one or multiple other objects
 **targetObject** *(array)* <br>
 The object that is extended.
 
-**object1** *(object)*
+**object1** *(object)* <br>
 Object to extend the `targetObject` with.
 
-**objectN** *(object)*
+**objectN** *(object)* <br>
 An unlimited number of other objects to also extend the `targetObject` with.
 
 **Example**
@@ -229,7 +239,7 @@ B.extend({name: 85, city: 'Nijmegen'}, {name: 21}, {name: 55, age: 21});
 ---
 
 #### B.setInterval(*handler*, *delay*)
-A safer alternative to the native setInterval function. Have a look over [here](http://zetafleet.com/blog/why-i-consider-setinterval-harmful) for more info on why this is necessary.
+A safer alternative to the native setInterval function.
 
 **handler** *(function)* <br>
 A function to run each time after the given delay
@@ -242,13 +252,13 @@ The delay in milliseconds
 ## Custom Builds
 After you cloned this repository to your computer you are able to create custom builds using Browserkit's `grunt custom` task.
 
-Let's say we did a small project in which we used the complete Browserkit library. Now everything is almost done and all that is left for us to do is to minimizing the data as much as possible.
+Let's say we worked on a small project in which we used the complete Browserkit library. Now everything is almost done and all that is left for us to do is minimizing the data as much as possible.
 
 Looking through our JavaScript it seems we are only using the `click`, `ajax` and `toggleClass` methods.
 
-Using `grunt custom` we can create a build that only includes these methods and their dependencies and leaves out all the other methods which we don't need for our project. This can save us a good amount of data.
+Using `grunt custom` we can create a build that only includes these methods and their dependencies and leaves out all the other methods we don't need for our project. This can save us a good amount of data.
 
-Be arare that the parameters we need to pass to the task are not the methods but the files we want to include.
+Be aware that the parameters we need to pass to the task are not the methods but the files we want to include.
 
 * `click` can be found in custom-eventlisteners.js
 * `ajax` can be found in ajax.js
