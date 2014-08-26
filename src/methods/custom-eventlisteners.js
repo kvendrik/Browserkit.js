@@ -1,5 +1,5 @@
-//import google fastbutton before Browserkit.js
-//if not Browserkit won't find the FastButton Object
+//import Google fastbutton before Browserkit.js
+//if not Browserkit won't be able to find the FastButton Object
 if(typeof window.FastButton === 'function'){
 
 	_defineMethod('click', function(handler){

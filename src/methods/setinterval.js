@@ -1,7 +1,5 @@
 _defineMethod('setInterval', function(handler, delay){
 
-  handler();
-
   var self = this;
 
   //user calls the method
@@ -18,6 +16,7 @@ _defineMethod('setInterval', function(handler, delay){
   			//this makes it impossble to clear the correct Interval
   			//solution is to keep track of the current id
 
+        handler();
   			self.setInterval(handler, delay, true);
 
   		}, delay);

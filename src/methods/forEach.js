@@ -4,7 +4,7 @@ _defineMethod('forEach', function(obj, handler){
 
 		obj.forEach(handler);
 
-	} else if(obj instanceof Object){
+	} else if(typeof obj === 'object'){
 
 		for(var i in obj){
 			if(obj.hasOwnProperty(i)){

@@ -32,6 +32,8 @@ The stable version of Browserkit is tested the following browsers:
 <script src='browserkit.min.js'></script>
 ````
 
+Next to using the whole library it is also possible to create custom builds. For more info on how to do this please have a look at the [Custom Builds](#custom-builds) section of this page.
+
 ## Syntax
 Browserkit uses a syntax that is quite simular to other libraries:
 ```
@@ -55,7 +57,6 @@ Below you'll find some benchmarks done with Browserkit for your consideration
 * http://jsperf.com/zepto-vs-jquery-selectors/33
 * http://jsperf.com/browserkit-vs-jquery-benchmarks
 * http://jsperf.com/browserkit-selector-tests
-
 
 ## Methods
 
@@ -235,3 +236,69 @@ A function to run each time after the given delay
 
 **delay** *(number)* <br>
 The delay in milliseconds
+
+---
+
+## Custom Builds
+After you cloned this repository to your computer you are able to create custom builds using Browserkit's `grunt custom` task.
+
+Let's say we did a small project in which we used the complete Browserkit library. Now everything is almost done and all that is left for us to do is to minimizing the data as much as possible.
+
+Looking through our JavaScript it seems we are only using the `click`, `ajax` and `toggleClass` methods.
+
+Using `grunt custom` we can create a build that only includes these methods and their dependencies and leaves out all the other methods which we don't need for our project. This can save us a good amount of data.
+
+Be arare that the parameters we need to pass to the task are not the methods but the files we want to include.
+
+* `click` can be found in custom-eventlisteners.js
+* `ajax` can be found in ajax.js
+* `toggleClass` can be found in classes.js
+
+So let's create our custom build:
+
+```
+grunt custom:custom-eventlisteners,ajax,classes
+```
+
+Which generates the following output:
+
+```
+`eventlisteners` dependency added
+>> `custom-eventlisteners` methods added
+>> `ajax` methods added
+>> `classes` methods added
+
+temporary file deleted
+>> custom build created in dist/
+```
+
+Tadaaaa, A minified custom build has been created in dist/ which is ready to be used in your project.
+
+##License
+Browserkit is licensed under a BSD-2-Clause license.
+
+```
+Copyright (c) 2014, Koen Vendrik
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGE.
+```

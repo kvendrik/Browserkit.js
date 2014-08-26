@@ -1,16 +1,18 @@
 /*
 
-	Name: Browserkit.js
-	Version: 1.2.0
+	Name: Browserkit.js (http://github.com/kvendrik/Browserkit.js)
+	Version: 1.0.0
 
 	Author: Koen Vendrik
-	License: MIT
+	License: BSD-2-Clause
 
 	Dependencies: none
 
 */
 
 (function(window, document, undefined){
+
+	'use strict';
 
 
 var _defineMethod = function(name, method, proto){
@@ -26,7 +28,7 @@ var _defineMethod = function(name, method, proto){
 var Browserkit = function(el){
 	//el can be a CSS selector or HTML element
 
-	if( this === window ){
+	if( this === window || this === undefined ){
 		return new Browserkit(el);
 	} else {
 
@@ -70,7 +72,7 @@ _defineMethod('_selector', function(selector, fromEl){
 
 	} else { //multiple el
 
-		el = selector.indexOf('.') === 0 ? fromEl.getElementsByClassName( selector.replace('.','') ) : ( /^[a-zA-Z]+$/.test(selector) ? fromEl.getElementsByTagName(selector) : fromEl.querySelectorAll(selector) );
+		var el = selector.indexOf('.') === 0 ? fromEl.getElementsByClassName( selector.replace('.','') ) : ( /^[a-zA-Z]+$/.test(selector) ? fromEl.getElementsByTagName(selector) : fromEl.querySelectorAll(selector) );
 
 		for(var i = 0, elCount = el.length; i < elCount; i++){
 			this[i] = el[i];

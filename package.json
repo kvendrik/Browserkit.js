@@ -1,6 +1,15 @@
 {
-  "name": "browserkit",
+  "name": "Browserkit.js",
+  "description": "A mini JavaScript library",
+  "keywords": ["javascript", "library"],
   "version": "1.0.0",
+
+  "repository": { "type":"git", "url":"http://github.com/kvendrik/Browserkit.js" },
+  "bugs": { "url" : "http://github.com/kvendrik/Browserkit.js/issues", "email" :"k.vendrik@gmail.com" },
+
+  "author": "Koen Vendrik <k.vendrik@gmail.com> (http://kvendrik.com)",
+  "license": "BSD-2-Clause",
+
   "devDependencies": {
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-watch": "^0.6.1",
@@ -9,14 +18,7 @@
     "grunt-shell": "^0.7.0",
     "grunt-contrib-jshint": "^0.10.0"
   },
-  "description": "A mini JavaScript library",
-  "main": "src/init.js",
   "dependencies": {
     "grunt": "~0.4.2"
-  },
-  "scripts": {
-    "test": "echo 'No tests specified yet ;)'"
-  },
-  "author": "Koen Vendrik",
-  "license": "MIT Creative License"
+  }
 }

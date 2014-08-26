@@ -1,6 +1,5 @@
-//Merge Objects
-//Merges multiple objects and overwrites
-//objects props that are already defined
+//Extends Objects
+//Extends target object with multiple other given objects and overwrites props that are already defined
 //{city:'Nijmegen'},{name:21},{name:55,age:21} becomes {city:'Nijmegen', name:55, age:21}
 _defineMethod('extend', function(){
 

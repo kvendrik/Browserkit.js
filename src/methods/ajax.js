@@ -1,4 +1,3 @@
-//Not a class function - doesn't use any of the classes variables
 _defineMethod('ajax', function(settings){
 
 	var httpRequest = new XMLHttpRequest();
@@ -8,6 +7,7 @@ _defineMethod('ajax', function(settings){
 
 			var responseString = httpRequest.responseText;
 
+			var rtrnData;
 			if(settings.dataType === 'json'){
 				rtrnData = JSON.parse(responseString);
 			} else {
