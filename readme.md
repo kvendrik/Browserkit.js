@@ -26,7 +26,8 @@ The stable version of Browserkit has been tested in the following browsers:
 
 
 ## Usage
-1. Grab the code from the dist/ folder and save it as a local copy
+1. a. Grab the code from the dist/ folder and save it as a local copy <br>
+   b. Grab the code using `bower install browserkit.js`
 2. Include it in your project
 ````
 <script src='browserkit.min.js'></script>
@@ -250,7 +251,7 @@ The delay in milliseconds
 ---
 
 ## Custom Builds
-After you cloned this repository to your computer you are able to create custom builds using Browserkit's `grunt custom` task.
+After you either cloned this repository to your computer or downloaded Browserkit using `bower` you are able to create custom builds using Browserkit's `grunt custom` task.
 
 Let's say we worked on a small project in which we used the complete Browserkit library. Now everything is almost done and all that is left for us to do is minimizing the data as much as possible.
 
