@@ -4,7 +4,7 @@
 	Version: 1.0.0
 
 	Author: Koen Vendrik
-	License: MIT
+	License: BSD-2-Clause
 
 	Dependencies: none
 

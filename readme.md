@@ -14,14 +14,14 @@ In case you're interested in using Browserkit I recommand you keep a local copy 
 
 
 ## Browser support
-The stable version of Browserkit is tested the following browsers:
+The stable version of Browserkit has been tested in the following browsers:
 * Opera: 17, 20
 * Chrome: 22, 30
 * Safari: 5.1
-* FF: 22, 27
-* IE: 8, 9, 10
-* Android: 2.3, 4.0, 4.1, 4.2
-* iOS: 6, 7
+* FF: 20, 27
+* IE: 9, 10
+* Android: 2.3, 4.0, 4.1, 4.2 (Native browser)
+* iOS: 6, 7 (Native browser)
 * Opera Mobile
 
 

@@ -4,6 +4,9 @@ module.exports = function (grunt)
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
+		settings: {
+			filename: 'browserkit'
+		},
 		connect: {
 			server: {
 				options: {
@@ -20,28 +23,28 @@ module.exports = function (grunt)
 			},
 			all: {
 				src: ['src/init.js', 'src/methods/*.js', 'src/footer.js'],
-				dest: 'tests/<%= pkg.name %>-<%= pkg.version %>.js'
+				dest: 'tests/<%= settings.filename %>-<%= pkg.version %>.js'
 			},
 			filtered: {
 				src: '<%= concat.methodsToInc %>',
-				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>-temp.custom.js'
+				dest: 'dist/<%= settings.filename %>-<%= pkg.version %>-temp.custom.js'
 			}
 		},
 		uglify: {
 		    all: {
 		      files: {
-		        'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': 'tests/<%= pkg.name %>-<%= pkg.version %>.js'
+		        'dist/<%= settings.filename %>-<%= pkg.version %>.min.js': 'tests/<%= settings.filename %>-<%= pkg.version %>.js'
 		      }
 		    },
 		    filtered: {
 		      files: {
-		        'dist/<%= pkg.name %>-<%= pkg.version %>.custom.min.js': 'dist/<%= pkg.name %>-<%= pkg.version %>-temp.custom.js',
+		        'dist/<%= settings.filename %>-<%= pkg.version %>.custom.min.js': 'dist/<%= settings.filename %>-<%= pkg.version %>-temp.custom.js',
 		      }
 		    }
   		},
   		shell: {
 	        rmCustomConcat: {
-	            command: 'rm dist/<%= pkg.name %>-<%= pkg.version %>-temp.custom.js'
+	            command: 'rm dist/<%= settings.filename %>-<%= pkg.version %>-temp.custom.js'
 	        }
     	},
 		watch: {
@@ -73,7 +76,7 @@ module.exports = function (grunt)
     			maxdepth: 4, //Max depth of nested blocks (within functions)
     			predef: ['FastButton']
 			},
-    		concatenated: 'tests/<%= pkg.name %>-<%= pkg.version %>.js'
+    		concatenated: 'tests/<%= settings.filename %>-<%= pkg.version %>.js'
   		}
 
 	});
