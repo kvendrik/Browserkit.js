@@ -20,5 +20,9 @@
   },
   "dependencies": {
     "grunt": "~0.4.2"
+  },
+
+  "scripts": {
+    "test": "grunt travis --verbose"
   }
 }

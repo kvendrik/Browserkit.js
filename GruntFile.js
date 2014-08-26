@@ -91,9 +91,12 @@ module.exports = function (grunt)
 	//testing
 	grunt.registerTask('serve', ['connect', 'watch']);
 	grunt.registerTask('merge', ['concat:all']);
-	grunt.registerTask('mergemin', ['concat:all','jshint','uglify:all']); //generates file in dist/ and then uglifies
+
+	//travis
+	grunt.registerTask('travis', ['concat:all','jshint','uglify:all']);
 
 	//distribute
+	grunt.registerTask('mergemin', ['concat:all','jshint','uglify:all']); //generates file in dist/ and then uglifies
 	grunt.registerTask('custom', 'Custom build Browserkit by choosing the methods you need like e.g. `grunt custom:ajax,classes,eventslisteners`', function(options){
 		var optionsArr = options.split(','),
 
