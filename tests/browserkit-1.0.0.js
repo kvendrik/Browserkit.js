@@ -17,7 +17,7 @@
 
 var _defineMethod = function(name, method, proto){
 
-	if(proto === undefined || proto === true){
+	if(proto || proto === undefined){
 		Browserkit.prototype[name] = method;
 	} else {
 		Browserkit[name] = method;
@@ -36,25 +36,19 @@ var Browserkit = function(el){
 
 		if(elType === 'object'){
 
-			this[0] = el;
-
-		} else if(elType === 'string') {
-
-
-			if(el.indexOf('#') === 0){ //single el
-
-				this[0] = document.getElementById( el.replace('#','') );
-
-			} else { //multiple el
-
-				el = el.indexOf('.') === 0 ? document.getElementsByClassName( el.replace('.','') ) : ( /^[a-zA-Z]+$/.test(el) ? document.getElementsByTagName(el) : document.querySelectorAll(el) );
+			if(el[1] && el[1].nodeType === 1){
 
 				for(var i = 0, elCount = el.length; i < elCount; i++){
 					this[i] = el[i];
 				}
 
+			} else {
+				this[0] = el;
 			}
 
+		} else if(elType === 'string') {
+
+			this._selector(el, document);
 
 		}
 
