@@ -59,7 +59,7 @@
 	<div id="howareya">How are ya?</div>
 
 <script src='browserkit-1.0.0.js'></script>
-<script src="//code.jquery.com/jquery.min.js"></script>
+<!--<script src="//code.jquery.com/jquery.min.js"></script>-->
 <script>
 
 	if(console === undefined){
@@ -90,6 +90,10 @@
 	//Selector
 	log('Selector<br>');
 	test('Selector', B('.selection-test')[0].nodeType === 1);
+
+	//Process array
+	var processEls = document.getElementsByClassName('selection-test');
+	test('Process array of El', B(processEls)[2] && B(processEls)[2].nodeType === 1);
 
 	//Find
 	var elHTML = '';
