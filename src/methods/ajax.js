@@ -1,6 +1,8 @@
 _defineMethod('ajax', function(settings){
 
-	var httpRequest = new XMLHttpRequest();
+	var httpRequest = new XMLHttpRequest(),
+		data = settings.data,
+		dataType = settings.dataType;
 
 	httpRequest.onreadystatechange = function(){
 		if(httpRequest.readyState === 4 && httpRequest.status === 200){
@@ -8,28 +10,41 @@ _defineMethod('ajax', function(settings){
 			var responseString = httpRequest.responseText;
 
 			var rtrnData;
-			if(settings.dataType === 'json'){
-				rtrnData = JSON.parse(responseString);
+			if(dataType === 'json'){
+				try {
+					rtrnData = JSON.parse(responseString);
+				} catch(err){
+					rtrnData = responseString;
+				}
 			} else {
 				rtrnData = responseString;
 			}
 
 			if(typeof settings.success === 'function'){
-				settings.success(rtrnData);
+				settings.success(rtrnData, httpRequest);
 			}
 
 		}
 	};
 
-	var requestType = settings.type !== undefined && settings.type.toLowerCase() === 'post' ? 'POST' : 'GET';
+	var requestType = settings.type !== undefined ? settings.type.toUpperCase() : 'GET',
+		postTypes = ['POST', 'PUT', 'DELETE'];
 
 	httpRequest.open(requestType, settings.url, true);
 
-	if(requestType === 'POST'){
-		httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	if(postTypes.indexOf(requestType) !== -1){
+		if(dataType === 'json'){
+			httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+		} else {
+			httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		}
 	}
 
-	httpRequest.send(settings.data);
+	if(dataType === 'json' && typeof data === 'object' && !Array.isArray(data)){
+		data = JSON.stringify(data);
+	}
+
+	httpRequest.send(data);
 
 }, false);
 
