@@ -210,7 +210,7 @@ Those specific parameters are there because for arrays the function uses the nat
 
 **Example**
 ``````
-B.each({ name: "Koen", age: 20 }, function(value, property, object){
+B.forEach({ name: "Koen", age: 20 }, function(value, property, object){
 	console.log(object+'["'+property+'"] = '+value);
 	//{ name: "Koen", age: 20 }["name"] = "Koen"
 	//{ name: "Koen", age: 20 }["age"] = 20
