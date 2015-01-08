@@ -172,19 +172,26 @@ B('#scrollcheck').scrollTop(); //100
 ---
 
 #### B.ajax(*settings*)
-Gets/posts data from/to a file and passes the result on to a callback function
+Gets/posts data from/to a file and passes the result on to a callback function.
 
 **settings** *(object)* <br>
+* url - *URL to send the request to*
+* [type] - *Type of the request, accepts POST, PUT, DELETE or GET, defaults to GET*
+* [data] - *URL encoded data string or json*
+* [dataType] - *Type of the data we get back from the server. Defaults to plain text.*
+* [success] - *Callback function. Accepts parameter it binds the data to and XMLHttpRequest object to.*
+
+**Example**
 ``````
-{
-	url: 'lib/post.php', //Url to the file
-	type: 'POST', //Type of the request, default is GET
-	data: 'animal=kittens&cute=true', //Url encoded data string
-	dataType: 'json', //Type of the returned data. Currently only accepts `json`, anything else will just be returned as a string.
-	success: function(data){ //Callback function. Accepts parameter it binds the data to.
+B.ajax({
+	url: 'lib/post.php',
+	type: 'POST',
+	data: 'animal=kittens&cute=true',
+	dataType: 'json',
+	success: function(data, xhr){
 		document.body.innerHTML += data;
 	}
-}
+});
 ``````
 
 ---
