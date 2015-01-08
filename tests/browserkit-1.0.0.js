@@ -258,7 +258,7 @@ _defineMethod('resizeEnd', function(handler){
 _defineMethod('each', function(handler){
 
 	for(var prop in this){
-		if( this[prop].nodeType === 1 ){
+		if(this[prop].nodeType === 1){
 			handler(this[prop]);
 		}
 	}
@@ -298,13 +298,36 @@ _defineMethod('extend', function(){
 
 }, false);
 
-_defineMethod('find', function(selector){
+(function(_defineMethod){
 
-	this._selector(selector, this[0]);
+	var clearResultsInClone;
 
-	return this;
+	_defineMethod('find', function(selector){
 
-});
+		//init function on first invoke
+		if(!clearResultsInClone){
+			clearResultsInClone = function(cloneObj){
+				for(var prop in cloneObj){
+					if(!isNaN(prop)){
+						cloneObj[prop] = undefined;
+					}
+				}
+				return cloneObj;
+			};
+		}
+
+		var clone = Object.create(this);
+
+		//remove previous results
+		clone = clearResultsInClone.call(this, clone);
+
+		clone._selector(selector, this[0]);
+
+		return clone;
+
+	});
+
+}(_defineMethod));
 
 _defineMethod('forEach', function(obj, handler){
 
@@ -327,15 +350,15 @@ _defineMethod('forEach', function(obj, handler){
 _defineMethod('setInterval', function(handler, delay){
 
     //init intervalCache to store interval ID's
-    if(typeof this.intervalCache !== 'object'){
-        this.intervalCache = {
+    if(typeof this._intervalCache !== 'object'){
+        this._intervalCache = {
             currIdx: 0,
             cache: {}
         };
     }
 
     var self = this,
-        intervalCache = this.intervalCache,
+        intervalCache = this._intervalCache,
         cache = intervalCache.cache,
         newId = intervalCache.currIdx++;
 
@@ -374,12 +397,12 @@ _defineMethod('setInterval', function(handler, delay){
 
 _defineMethod('clearInterval', function(intervalId){
 
-    if(typeof this.intervalCache === 'object'){
-        var cache = this.intervalCache.cache,
+    if(typeof this._intervalCache === 'object'){
+        var cache = this._intervalCache.cache,
             originalId = cache[intervalId];
 
         if(typeof originalId === 'number'){
-            delete cache[intervalId];
+            cache[intervalId] = undefined;
             return window.clearTimeout(originalId);
         }
     }
