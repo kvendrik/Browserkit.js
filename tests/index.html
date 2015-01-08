@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Browserkit</title>
 <style>
+	body {
+		height: 2000px;
+	}
+
 	#test-results {
 		width: 100%;
 		margin-bottom: 80px;
@@ -17,6 +21,13 @@
 
 	#test-results .error {
 		color: red;
+	}
+
+	#scrollcheck {
+		width: 100px;
+		height: 100px;
+		overflow: scroll;
+		margin: 20px;
 	}
 </style>
 </head>
@@ -57,6 +68,8 @@
 	</form>
 
 	<div id="howareya">How are ya?</div>
+
+	<div id="scrollcheck">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium ullam nulla veniam hic unde quia aut praesentium delectus illo itaque blanditiis dolores architecto ab esse tenetur voluptas distinctio, atque vero.</div>
 
 <script src='browserkit-1.0.0.js'></script>
 <!--<script src="//code.jquery.com/jquery.min.js"></script>-->
@@ -175,6 +188,7 @@
 
 */
 
+/*
 B.ajax({
 	url: 'http://127.0.0.1:3000/v1',
 	data: {
@@ -195,6 +209,20 @@ B.ajax({
 B.getJSON('http://127.0.0.1:3000/v1/testData', function(data){
 	console.log(data);
 });
+*/
+
+(function(){
+
+var el = B('#scrollcheck'),
+	Bwindow = B(window);
+
+log('scrollTop<br>');
+test('Element set', el.scrollTop(100)[0] === el[0]);
+test('Element get', el.scrollTop() === 100);
+test('Window set', Bwindow.scrollTop(100)[0] === Bwindow[0]);
+test('Window get', Bwindow.scrollTop() === 100);
+
+}());
 
 </script>
 
