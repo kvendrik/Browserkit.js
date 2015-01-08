@@ -14,6 +14,4 @@ _defineMethod('forEach', function(obj, handler){
 
 	}
 
-	return this;
-
 }, false);

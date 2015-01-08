@@ -158,15 +158,21 @@
 
 
 	var i = 0;
-	B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
+	var intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
+	var intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
 
 	setTimeout(function(){
 		//setInterval
 		log('<br><br>setInterval<br>');
-		test('setInterval', i === 3 );
+		test('setInterval', i === 6 );
 
 		document.title = passed+' passed and '+errors+' errors occured';
-	},2000);
+
+		log('<br><br>clearInterval<br>');
+		B.clearInterval(intervalId);
+		B.clearInterval(intervalId2);
+		test('clearInterval', typeof B.intervalCache === 'object' && typeof B.intervalCache.cache === 'object' && B.intervalCache.cache[0] === undefined );
+	}, 600*4);
 
 
 /*

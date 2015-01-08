@@ -62,7 +62,7 @@ Below you'll find some benchmarks done with Browserkit for your consideration
 ## Methods
 
 #### find(*selector*)
-Finds a element inside the element specified in `B()`.
+Finds a element inside the element specified in `B()`
 
 **selector** *(string)* <br>
 A CSS selector. The selector works the fastest when only specifing a class or tag name and not both.
@@ -172,7 +172,7 @@ B('#scrollcheck').scrollTop(); //100
 ---
 
 #### B.ajax(*settings*)
-Gets/posts data from/to a file and passes the result on to a callback function.
+Gets/posts data from/to a file and passes the result on to a callback function
 
 **settings** *(object)* <br>
 * url - *URL to send the request to*
@@ -239,8 +239,8 @@ B.forEach({ name: "Koen", age: 20 }, function(value, property, object){
 
 ---
 
-#### B.extend(*targetObject*, *object1*, *objectN*)
-Extends an object with one or multiple other objects
+#### B.extend(*targetObject*, *object1*[, *objectN*])
+Extends an object with one or multiple other objects. Returns the new object.
 
 **targetObject** *(array)* <br>
 The object that is extended.
@@ -260,13 +260,21 @@ B.extend({name: 85, city: 'Nijmegen'}, {name: 21}, {name: 55, age: 21});
 ---
 
 #### B.setInterval(*handler*, *delay*)
-A safer alternative to the native setInterval function.
+A safer alternative to the native setInterval function. Returns an interval id.
 
 **handler** *(function)* <br>
-A function to run each time after the given delay
+A function to run each time after the given delay.
 
 **delay** *(number)* <br>
-The delay in milliseconds
+The delay in milliseconds.
+
+---
+
+#### B.clearInterval(*intervalId*)
+Clear an interval you've set with `B.setInterval`
+
+**intervalId** *(number)* <br>
+The id of the interval you'd like to clear.
 
 ---
 
