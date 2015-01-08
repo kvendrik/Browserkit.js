@@ -1,15 +1,15 @@
 _defineMethod('setInterval', function(handler, delay){
 
     //init intervalCache to store interval ID's
-    if(typeof this.intervalCache !== 'object'){
-        this.intervalCache = {
+    if(typeof this._intervalCache !== 'object'){
+        this._intervalCache = {
             currIdx: 0,
             cache: {}
         };
     }
 
     var self = this,
-        intervalCache = this.intervalCache,
+        intervalCache = this._intervalCache,
         cache = intervalCache.cache,
         newId = intervalCache.currIdx++;
 
@@ -48,12 +48,12 @@ _defineMethod('setInterval', function(handler, delay){
 
 _defineMethod('clearInterval', function(intervalId){
 
-    if(typeof this.intervalCache === 'object'){
-        var cache = this.intervalCache.cache,
+    if(typeof this._intervalCache === 'object'){
+        var cache = this._intervalCache.cache,
             originalId = cache[intervalId];
 
         if(typeof originalId === 'number'){
-            delete cache[intervalId];
+            cache[intervalId] = undefined;
             return window.clearTimeout(originalId);
         }
     }

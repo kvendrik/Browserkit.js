@@ -39,7 +39,9 @@
 
 	<section class='area area2'>
 
-		<article id='article' class='column hithere'>Article 1</article>
+		<article id='article' class='column hithere'>
+			<p>Article 1</p>
+		</article>
 		<article id='article' class='column hithere'>Article 2</article>
 
 	</section>
@@ -109,11 +111,6 @@
 	var processEls = document.getElementsByClassName('selection-test');
 	test('Process array of El', B(processEls)[2] && B(processEls)[2].nodeType === 1);
 
-	//Find
-	var elHTML = '';
-	B('.area').find('article').each(function(el){ elHTML += el.innerHTML; });
-	test('Find', elHTML === 'Article 1Article 2');
-
 	//Classes
 	log('<br><br>Classes<br>');
 	test('addClass', (B('.somep').addClass('add')[0].className === 'somep add') );
@@ -171,8 +168,21 @@
 		log('<br><br>clearInterval<br>');
 		B.clearInterval(intervalId);
 		B.clearInterval(intervalId2);
-		test('clearInterval', typeof B.intervalCache === 'object' && typeof B.intervalCache.cache === 'object' && B.intervalCache.cache[0] === undefined );
+		test('clearInterval', typeof B._intervalCache === 'object' && typeof B._intervalCache.cache === 'object' && B._intervalCache.cache[0] === undefined );
 	}, 600*4);
+
+	//Find test
+	(function(){
+
+		var el = B('.area'),
+			articles = el.find('article'),
+			paragraphs = articles.find('p');
+
+		log('<br><br>Find<br>');
+		test('Find', articles[1].tagName === 'ARTICLE' );
+		test('Find depth', paragraphs[0].tagName === 'P' );
+
+	}());
 
 
 /*
@@ -225,7 +235,7 @@
 var el = B('#scrollcheck'),
 	Bwindow = B(window);
 
-log('scrollTop<br>');
+log('<br><br>scrollTop<br>');
 test('Element set', el.scrollTop(100)[0] === el[0]);
 test('Element get', el.scrollTop() === 100);
 test('Window set', Bwindow.scrollTop(100)[0] === Bwindow[0]);
