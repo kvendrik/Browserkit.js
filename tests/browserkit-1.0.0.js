@@ -216,23 +216,31 @@ if(typeof document.documentElement.classList === 'object'){
 
 }
 
-//import Google fastbutton before Browserkit.js
-//if not Browserkit won't be able to find the FastButton Object
-if(typeof window.FastButton === 'function'){
+(function(_defineMethod){
+
+	var addEventToEl;
 
 	_defineMethod('click', function(handler){
-		new FastButton(this[0], handler);
+
+		//on first invoke check if Google FastButton should be used
+		if(!addEventToEl){
+			if(typeof window.FastButton === 'function'){
+				addEventToEl = function(handler){
+					new FastButton(this[0], handler);
+				};
+			} else {
+				addEventToEl = function(handler){
+					this.on('click', handler);
+				};
+			}
+		}
+
+		addEventToEl.call(this, handler);
+
 		return this;
 	});
 
-} else {
-
-	_defineMethod('click', function(handler){
-		this.on('click', handler);
-		return this;
-	});
-
-}
+}(_defineMethod));
 
 
 //RESIZE END
@@ -300,7 +308,7 @@ _defineMethod('find', function(selector){
 
 _defineMethod('forEach', function(obj, handler){
 
-	if( Array.isArray(obj) ){
+	if(Array.isArray(obj)){
 
 		obj.forEach(handler);
 
@@ -318,7 +326,7 @@ _defineMethod('forEach', function(obj, handler){
 
 }, false);
 
-(function(){
+(function(_defineMethod){
 	
 	var getWindowScrollTop,
 		docEl;
@@ -359,7 +367,7 @@ _defineMethod('forEach', function(obj, handler){
 		}
 	});
 
-}());
+}(_defineMethod));
 
 _defineMethod('serialize', function(){
 
