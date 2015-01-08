@@ -357,8 +357,7 @@ _defineMethod('setInterval', function(handler, delay){
         };
     }
 
-    var self = this,
-        intervalCache = this._intervalCache,
+    var intervalCache = this._intervalCache,
         cache = intervalCache.cache,
         newId = intervalCache.currIdx++;
 
