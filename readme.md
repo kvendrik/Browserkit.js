@@ -157,6 +157,19 @@ B('.kitten').each(function(el){
 Converts the data of a given form into a query string
 
 ---
+#### scrollTop([*newY*])
+Get the vertical scroll position of an element or scroll the element to the given Y position. Returns either the vertical scroll position of the element or the Browserkit object.
+
+**newY** *(number)* <br>
+Y value to scroll the element to.
+
+**Example**
+``````
+B('#scrollcheck').scrollTop(100);
+B('#scrollcheck').scrollTop(); //100
+``````
+
+---
 
 #### B.ajax(*settings*)
 Gets/posts data from/to a file and passes the result on to a callback function
