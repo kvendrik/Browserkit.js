@@ -1,6 +1,6 @@
 _defineMethod('forEach', function(obj, handler){
 
-	if( Array.isArray(obj) ){
+	if(Array.isArray(obj)){
 
 		obj.forEach(handler);
 

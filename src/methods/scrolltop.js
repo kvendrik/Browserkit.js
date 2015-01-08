@@ -1,4 +1,4 @@
-(function(){
+(function(_defineMethod){
 	
 	var getWindowScrollTop,
 		docEl;
@@ -39,4 +39,4 @@
 		}
 	});
 
-}());
+}(_defineMethod));

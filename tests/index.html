@@ -100,7 +100,6 @@
 
 	document.title = 'Running tests...';
 
-/*
 
 	//Selector
 	log('Selector<br>');
@@ -157,6 +156,22 @@
 	log( B('#form').serialize()+'<br>');
 	test('Serialize Form', ( B('#form').serialize() === '=Post&this-one=yep&do-you=yes&i-like=Kittens!&some-comments=Yeah i have some' ) );
 
+
+	var i = 0;
+	B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
+
+	setTimeout(function(){
+		//setInterval
+		log('<br><br>setInterval<br>');
+		test('setInterval', i === 3 );
+
+		document.title = passed+' passed and '+errors+' errors occured';
+	},2000);
+
+
+/*
+(function(){
+
 	//Get JSON
 	B.getJSON('lib/get.json', function(data){
 		log('<br><br>getJSON<br>');
@@ -175,40 +190,28 @@
 		}
 	});
 
-	var i = 0;
-	B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
-
-	setTimeout(function(){
-		//setInterval
-		log('<br><br>setInterval<br>');
-		test('setInterval', i === 3 );
-
-		document.title = passed+' passed and '+errors+' errors occured';
-	},2000);
-
-*/
-
-/*
-B.ajax({
-	url: 'http://127.0.0.1:3000/v1',
-	data: {
-		collection: "testData",
-		id:"5437974da30275940597ce36",
+	B.ajax({
+		url: 'http://127.0.0.1:3000/v1',
 		data: {
-			name:"Bas",
-			food:"Kapsalon"
+			collection: "testData",
+			id:"5437974da30275940597ce36",
+			data: {
+				name:"Bas",
+				food:"Kapsalon"
+			}
+		},
+		type: 'put',
+		dataType: 'json',
+		success: function(data, xhr){
+			console.log(data);
 		}
-	},
-	type: 'put',
-	dataType: 'json',
-	success: function(data, xhr){
-		console.log(data);
-	}
-});
+	});
 
-B.getJSON('http://127.0.0.1:3000/v1/testData', function(data){
-	console.log(data);
-});
+	B.getJSON('http://127.0.0.1:3000/v1/testData', function(data){
+		console.log(data);
+	});
+
+}());
 */
 
 (function(){
