@@ -96,6 +96,8 @@
 				log(name+': '+'<span class="error">Error</span>'+'<br>');
 				errors++;
 			}
+		}, done = function(){
+			document.title = passed+' passed and '+errors+' errors occured';
 		};
 
 	//test objects
@@ -153,23 +155,37 @@
 	log( B('#form').serialize()+'<br>');
 	test('Serialize Form', ( B('#form').serialize() === '=Post&this-one=yep&do-you=yes&i-like=Kittens!&some-comments=Yeah i have some' ) );
 
+	var intervalsTestTime = 100;
 
 	var i = 0;
-	var intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
-	var intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, 600);
+	var intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
+	var intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
 
 	setTimeout(function(){
 		//setInterval
 		log('<br><br>setInterval<br>');
 		test('setInterval', i === 6 );
 
-		document.title = passed+' passed and '+errors+' errors occured';
-
 		log('<br><br>clearInterval<br>');
 		B.clearInterval(intervalId);
 		B.clearInterval(intervalId2);
 		test('clearInterval', typeof B._intervalCache === 'object' && typeof B._intervalCache.cache === 'object' && B._intervalCache.cache[0] === undefined );
-	}, 600*4);
+
+		//Check use of available spaces
+		intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
+		intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
+
+		log('<br><br>Intervals available spaces usage<br>');
+		test('setInterval', intervalId === 0 && intervalId2 === 1 && B._intervalCache.availableIdxs[1] === undefined );
+
+		setTimeout(function(){
+			B.clearInterval(intervalId);
+			B.clearInterval(intervalId2);
+			test('clearInterval', B._intervalCache.availableIdxs.length === 2 );
+
+			done();
+		}, intervalsTestTime*4);
+	}, intervalsTestTime*4);
 
 	//Find test
 	(function(){

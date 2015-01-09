@@ -3,14 +3,28 @@ _defineMethod('setInterval', function(handler, delay){
     //init intervalCache to store interval ID's
     if(typeof this._intervalCache !== 'object'){
         this._intervalCache = {
-            currIdx: 0,
+            currNextIdx: 0,
+            availableIdxs: [],
             cache: {}
         };
     }
 
     var intervalCache = this._intervalCache,
         cache = intervalCache.cache,
-        newId = intervalCache.currIdx++;
+        availableIdxs = intervalCache.availableIdxs,
+        newId;
+
+    //check if there are idxs available
+    //this because this will re-use unused
+    //array spaces which prevents the cache object
+    //from getting too big
+    if(availableIdxs.length > 0){
+        //space available
+        newId = availableIdxs[0];
+        availableIdxs.splice(0, 1);
+    } else {
+        newId = intervalCache.currNextIdx++;
+    }
 
     //save a space for the new id
     cache[newId] = 0;
@@ -48,11 +62,13 @@ _defineMethod('setInterval', function(handler, delay){
 _defineMethod('clearInterval', function(intervalId){
 
     if(typeof this._intervalCache === 'object'){
-        var cache = this._intervalCache.cache,
+        var intervalCache = this._intervalCache,
+            cache = intervalCache.cache,
             originalId = cache[intervalId];
 
         if(typeof originalId === 'number'){
             cache[intervalId] = undefined;
+            intervalCache.availableIdxs.push(intervalId);
             return window.clearTimeout(originalId);
         }
     }
