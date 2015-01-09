@@ -305,7 +305,7 @@ temporary file deleted
 Tadaaaa, A minified custom build has been created in dist/ which is ready to be used in your project.
 
 ##License
-Browserkit is licensed under a BSD-2-Clause license.
+Browserkit is licensed under a BSD 2-Clause license.
 
 ```
 Copyright (c) 2014, Koen Vendrik

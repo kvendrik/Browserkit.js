@@ -1,23 +1,20 @@
 {
   "name": "Browserkit.js",
-  "version": "1.0.0",
-  "homepage": "https://github.com/kvendrik/Browserkit.js",
+  "version": "1.1.0",
+  "homepage": "http://github.com/kvendrik/Browserkit.js",
   "authors": [
     "Koen Vendrik <k.vendrik@gmail.com>"
   ],
   "description": "A mini JavaScript library",
-  "main": "dist/browserkit-1.0.0.min.js",
+  "main": "dist/browserkit-1.1.0.min.js",
   "keywords": [
     "javascript",
     "library"
   ],
-  "license": "BSD-2-Clause",
+  "license": "BSD 2-Clause",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "**/*",
+    "!(./dist/browserkit-1.1.0.min.js)"
   ],
   "devDependencies": {
     "grunt": "~0.4.2",
