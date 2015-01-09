@@ -201,7 +201,7 @@
 	}());
 
 
-/*
+
 (function(){
 
 	//Get JSON
@@ -211,19 +211,18 @@
 	});
 
 	B.ajax({
-		url: 'lib/post.php',
+		url: 'lib/post-str.php',
 		data: 'didwork=true',
 		type: 'post',
 		dataType: 'json',
 		success: function(data){
-			log('<br><br>AJAX<br>');
-			log(JSON.stringify(data)+'<br>');
-			test('AJAX', typeof data === 'object' );
+			log('<br><br>AJAX String Post<br>');
+			test('String Post', data.didwork === 'true' );
 		}
 	});
 
 	B.ajax({
-		url: 'http://127.0.0.1:3000/v1',
+		url: 'lib/post-json.php',
 		data: {
 			collection: "testData",
 			id:"5437974da30275940597ce36",
@@ -232,19 +231,17 @@
 				food:"Kapsalon"
 			}
 		},
-		type: 'put',
+		type: 'post',
 		dataType: 'json',
 		success: function(data, xhr){
+			log('<br><br>AJAX Json Post<br>');
 			console.log(data);
+			test('Json Post', typeof data === 'object' );
 		}
 	});
 
-	B.getJSON('http://127.0.0.1:3000/v1/testData', function(data){
-		console.log(data);
-	});
-
 }());
-*/
+
 
 (function(){
 
