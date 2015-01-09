@@ -308,7 +308,7 @@ _defineMethod('extend', function(){
 		if(!clearResultsInClone){
 			clearResultsInClone = function(cloneObj){
 				for(var prop in cloneObj){
-					if(!isNaN(prop)){
+					if(cloneObj.hasOwnProperty(prop) && !isNaN(prop)){
 						cloneObj[prop] = undefined;
 					}
 				}
