@@ -1,12 +1,10 @@
 /*
 
 	Name: Browserkit.js (http://github.com/kvendrik/Browserkit.js)
-	Version: 1.0.0
+	Version: 1.1.0
 
 	Author: Koen Vendrik
 	License: BSD-2-Clause
-
-	Dependencies: none
 
 */
 
@@ -34,22 +32,19 @@ var Browserkit = function(el){
 
 		var elType = typeof el;
 
-		if(elType === 'object'){
-
-			if(el[1] && el[1].nodeType === 1){
-
-				for(var i = 0, elCount = el.length; i < elCount; i++){
-					this[i] = el[i];
-				}
-
-			} else {
-				this[0] = el;
-			}
-
-		} else if(elType === 'string') {
-
+		if(elType === 'string') {
+			//selector string
 			this._selector(el, document);
 
+		} else if(el.nodeType === 1 || el === window){
+			//single html element or window object
+			this[0] = el;
+
+		} else if(el[0] && el[0].nodeType === 1){
+			//array of html elements
+			for(var i = 0, elCount = el.length; i < elCount; i++){
+				this[i] = el[i];
+			}
 		}
 
 		return this;
@@ -60,11 +55,12 @@ var Browserkit = function(el){
 
 _defineMethod('_selector', function(selector, fromEl){
 
-	if(selector.indexOf('#') === 0){ //single el
-
+	if(selector.indexOf('#') === 0){
+		//single el
 		this[0] = document.getElementById( selector.replace('#','') );
 
-	} else { //multiple el
+	} else {
+		//multiple el
 
 		var el = selector.indexOf('.') === 0 ? fromEl.getElementsByClassName( selector.replace('.','') ) : ( /^[a-zA-Z]+$/.test(selector) ? fromEl.getElementsByTagName(selector) : fromEl.querySelectorAll(selector) );
 
@@ -429,39 +425,31 @@ _defineMethod('clearInterval', function(intervalId){
 	var getWindowScrollTop,
 		docEl;
 
-	_defineMethod('scrollTop', function(newY){
+	_defineMethod('scrollTop', function(){
 		var el = this[0];
 
-		//on first use init docEl and getWindowScrollTop vars
-		if(!docEl){
-			docEl = (document.documentElement || document.body.parentNode || document.body);
-		}
-
+		//on first use init getWindowScrollTop vars
 		if(!getWindowScrollTop){
 			if(window.pageYOffset !== undefined){
 				getWindowScrollTop = function(){
 					return window.pageYOffset;
 				};
 			} else {
+				if(!docEl){
+					docEl = (document.documentElement || document.body.parentNode || document.body);
+				}
+
 				getWindowScrollTop = function(){
 					return docEl.scrollTop;
 				};
 			}
 		}
 
-		if(newY){
-			if(el === window){
-				el.scrollTo(0, newY);
-			} else {
-				el.scrollTop = newY;
-			}
-			return this;
+		
+		if(el === window){
+			return getWindowScrollTop();
 		} else {
-			if(el === window){
-				return getWindowScrollTop();
-			} else {
-				return el.scrollTop;
-			}
+			return el.scrollTop;
 		}
 	});
 

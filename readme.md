@@ -16,12 +16,12 @@ In case you're interested in using Browserkit I recommand you keep a local copy 
 ## Browser support
 The stable version of Browserkit has been tested in the following browsers:
 * Opera: 17, 20
-* Chrome: 22, 30
+* Chrome: 22, 30, 39
 * Safari: 5.1
-* FF: 20, 27
+* FF: 20, 27, 33
 * IE: 9, 10
-* Android: 2.3, 4.0, 4.1, 4.2 (Native browser)
-* iOS: 6, 7 (Native browser)
+* Android: 2.3, 4.0, 4.1, 4.2, 4.4 (Native browser)
+* iOS: 6, 7, 8 (Native browser)
 * Opera Mobile
 
 
@@ -157,15 +157,11 @@ B('.kitten').each(function(el){
 Converts the data of a given form into a query string
 
 ---
-#### scrollTop([*newY*])
-Get the vertical scroll position of an element or scroll the element to the given Y position. Returns either the vertical scroll position of the element or the Browserkit object.
-
-**newY** *(number)* <br>
-Y value to scroll the element to.
+#### scrollTop()
+Get the vertical scroll position of an element.
 
 **Example**
 ``````
-B('#scrollcheck').scrollTop(100);
 B('#scrollcheck').scrollTop(); //100
 ``````
 

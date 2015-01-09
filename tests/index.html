@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0" />
 	<title>Browserkit</title>
 <style>
 	body {
@@ -155,16 +156,19 @@
 	log( B('#form').serialize()+'<br>');
 	test('Serialize Form', ( B('#form').serialize() === '=Post&this-one=yep&do-you=yes&i-like=Kittens!&some-comments=Yeah i have some' ) );
 
-	var intervalsTestTime = 100;
+	var intervalsTestTime = 400;
 
-	var i = 0;
-	var intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
-	var intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
+	var i = 0,
+		j = 0,
+		k = 0,
+		q = 0;
+	var intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval1:'+(i++); }, intervalsTestTime);
+	var intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval2:'+(j++); }, intervalsTestTime);
 
 	setTimeout(function(){
 		//setInterval
 		log('<br><br>setInterval<br>');
-		test('setInterval', i === 6 );
+		test('setInterval', i === 3 );
 
 		log('<br><br>clearInterval<br>');
 		B.clearInterval(intervalId);
@@ -172,8 +176,8 @@
 		test('clearInterval', typeof B._intervalCache === 'object' && typeof B._intervalCache.cache === 'object' && B._intervalCache.cache[0] === undefined );
 
 		//Check use of available spaces
-		intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
-		intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval:'+(i++); }, intervalsTestTime);
+		intervalId = B.setInterval(function(){ document.body.innerHTML += 'Interval3:'+(k++); }, intervalsTestTime);
+		intervalId2 = B.setInterval(function(){ document.body.innerHTML += 'Interval4:'+(q++); }, intervalsTestTime);
 
 		log('<br><br>Intervals available spaces usage<br>');
 		test('setInterval', intervalId === 0 && intervalId2 === 1 && B._intervalCache.availableIdxs[1] === undefined );
@@ -184,8 +188,8 @@
 			test('clearInterval', B._intervalCache.availableIdxs.length === 2 );
 
 			done();
-		}, intervalsTestTime*4);
-	}, intervalsTestTime*4);
+		}, 1600);
+	}, 1600);
 
 	//Find test
 	(function(){
@@ -245,13 +249,17 @@
 (function(){
 
 var el = B('#scrollcheck'),
-	Bwindow = B(window);
+	Bwindow = B(window),
+	Bbody = B(document.body);
 
 log('<br><br>scrollTop<br>');
-test('Element set', el.scrollTop(100)[0] === el[0]);
-test('Element get', el.scrollTop() === 100);
-test('Window set', Bwindow.scrollTop(100)[0] === Bwindow[0]);
-test('Window get', Bwindow.scrollTop() === 100);
+test('Element get', el.scrollTop() === 0);
+test('Body get', Bbody.scrollTop() === 0);
+test('Window get', Bwindow.scrollTop() === 0);
+
+setTimeout(function(){
+	alert('Scrolltop Window: '+Bwindow.scrollTop()+' : Body: '+Bbody.scrollTop());
+}, 2000);
 
 }());
 
