@@ -235,8 +235,7 @@
 		dataType: 'json',
 		success: function(data, xhr){
 			log('<br><br>AJAX Json Post<br>');
-			console.log(data);
-			test('Json Post', typeof data === 'object' );
+			test('Json Post', data.collection === 'testData' );
 		}
 	});
 

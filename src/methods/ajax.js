@@ -34,7 +34,7 @@ _defineMethod('ajax', function(settings){
 
 	if(postTypes.indexOf(requestType) !== -1){
 		if(typeof data === 'object'){
-			httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+			httpRequest.setRequestHeader('Content-Type', 'application/json');
 		} else {
 			httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		}
