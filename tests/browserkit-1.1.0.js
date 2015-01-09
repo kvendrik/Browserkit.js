@@ -503,12 +503,9 @@ _defineMethod('serialize', function(){
 
 });
 
-	var B = Browserkit;
-
 	Browserkit.fn = Browserkit.prototype;
-	B.fn = Browserkit.prototype;
 
 	window.Browserkit = Browserkit;
-	window.B = B;
+	window.B = Browserkit;
 
 })(this, this.document);
