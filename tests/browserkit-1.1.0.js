@@ -4,7 +4,7 @@
 	Version: 1.1.0
 
 	Author: Koen Vendrik
-	License: BSD-2-Clause
+	License: BSD 2-Clause
 
 */
 
@@ -71,6 +71,7 @@ _defineMethod('_selector', function(selector, fromEl){
 	}
 
 });
+
 
 _defineMethod('ajax', function(settings){
 
