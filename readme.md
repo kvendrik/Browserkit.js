@@ -55,9 +55,10 @@ B('.kitten')[0];
 ## Performance
 Below you'll find some benchmarks done with Browserkit for your consideration
 
-* http://jsperf.com/zepto-vs-jquery-selectors/33
-* http://jsperf.com/browserkit-vs-jquery-benchmarks
-* http://jsperf.com/browserkit-selector-tests
+* http://jsperf.com/browserkit-extend-performance
+* http://jsperf.com/browserkit-vs-jquery-classes
+* http://jsperf.com/browserkit-vs-jquery-benchmarks/2
+* http://jsperf.com/browserkit-selector-tests/2
 
 ## Methods
 
