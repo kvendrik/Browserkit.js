@@ -1,9 +1,8 @@
-(function(_defineMethod){
-	
+_defineMethod('scrollTop', function(){
 	var getWindowScrollTop,
 		docEl;
 
-	_defineMethod('scrollTop', function(){
+	return function(){
 		var el = this[0];
 
 		//on first use init getWindowScrollTop vars
@@ -23,12 +22,11 @@
 			}
 		}
 
-		
+
 		if(el === window){
 			return getWindowScrollTop();
 		} else {
 			return el.scrollTop;
 		}
-	});
-
-}(_defineMethod));
+	};
+}());

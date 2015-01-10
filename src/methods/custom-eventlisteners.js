@@ -1,8 +1,7 @@
-(function(_defineMethod){
-
+_defineMethod('click', function(){
 	var addEventToEl;
 
-	_defineMethod('click', function(handler){
+	return function(handler){
 
 		//on first invoke check if Google FastButton should be used
 		if(!addEventToEl){
@@ -20,9 +19,8 @@
 		addEventToEl.call(this, handler);
 
 		return this;
-	});
-
-}(_defineMethod));
+	};
+}());
 
 
 //RESIZE END

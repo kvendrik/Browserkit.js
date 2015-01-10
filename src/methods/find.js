@@ -1,8 +1,7 @@
-(function(_defineMethod){
-
+_defineMethod('find', function(){
 	var clearResultsInClone;
 
-	_defineMethod('find', function(selector){
+	return function(selector){
 
 		//init function on first invoke
 		if(!clearResultsInClone){
@@ -25,6 +24,5 @@
 
 		return clone;
 
-	});
-
-}(_defineMethod));
+	};
+}());

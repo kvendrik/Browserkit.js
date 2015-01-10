@@ -110,7 +110,7 @@
 
 	document.title = 'Running tests...';
 
-/*
+
 	//Selector
 	log('Selector<br>');
 	test('Selector', B('.selection-test')[0].nodeType === 1);
@@ -268,7 +268,6 @@ setTimeout(function(){
 
 }());
 
-*/
 
 //Type
 (function(){
@@ -291,11 +290,12 @@ setTimeout(function(){
 	log('<br><br>noConflict<br>');
 	B.noConflict();
 	test('B', B === 'Other B var');
-	Browserkit.noConflict(true);
+	var backup = Browserkit.noConflict(true);
 	test('Browserkit', Browserkit === 'Other Browserkit var');
+	window.B = window.Browserkit = backup;
 }());
 
-done();
+//done();
 
 </script>
 
