@@ -74,6 +74,11 @@
 
 	<div id="scrollcheck">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium ullam nulla veniam hic unde quia aut praesentium delectus illo itaque blanditiis dolores architecto ab esse tenetur voluptas distinctio, atque vero.</div>
 
+<script>
+	//noConflict
+	var B = 'Other B var',
+		Browserkit = 'Other Browserkit var';
+</script>
 <script src='browserkit-1.1.0.js'></script>
 <!--<script src="//code.jquery.com/jquery.min.js"></script>-->
 <script>
@@ -88,7 +93,7 @@
 	var passed = 0,
 		errors = 0,
 		log = function(msg){
-			B('#test-results')[0].innerHTML += msg;
+			document.getElementById('test-results').innerHTML += msg;
 		}, test = function(name, test){
 			if(test === true){
 				log(name+': '+'<span class="success">Success</span>'+'<br>');
@@ -105,7 +110,7 @@
 
 	document.title = 'Running tests...';
 
-
+/*
 	//Selector
 	log('Selector<br>');
 	test('Selector', B('.selection-test')[0].nodeType === 1);
@@ -262,6 +267,35 @@ setTimeout(function(){
 }, 2000);
 
 }());
+
+*/
+
+//Type
+(function(){
+	log('<br><br>Type<br>');
+	test('Object', B.type({name:'Koen'}) === 'object');
+	test('Array', B.type([2,3,4,5]) === 'array');
+	test('Boolean', B.type(true) === 'boolean');
+	test('Number', B.type(3) === 'number');
+	test('String', B.type('') === 'string');
+	test('Undefined', B.type(undefined) === 'undefined');
+	test('Null', B.type(null) === 'null');
+	test('NaN', B.type(NaN) === 'number');
+	test('Function', B.type(function(){}) === 'function');
+	test('Regexp', B.type(/[]/) === 'regexp');
+	test('Date', B.type(new Date) === 'date');
+}());
+
+//noConflict
+(function(){
+	log('<br><br>noConflict<br>');
+	B.noConflict();
+	test('B', B === 'Other B var');
+	Browserkit.noConflict(true);
+	test('Browserkit', Browserkit === 'Other Browserkit var');
+}());
+
+done();
 
 </script>
 

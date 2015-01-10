@@ -55,10 +55,11 @@ B('.kitten')[0];
 ## Performance
 Below you'll find some benchmarks done with Browserkit for your consideration
 
-* http://jsperf.com/browserkit-extend-performance
 * http://jsperf.com/browserkit-vs-jquery-classes
 * http://jsperf.com/browserkit-vs-jquery-benchmarks/2
 * http://jsperf.com/browserkit-selector-tests/2
+* http://jsperf.com/typeof-vs-array-isarray
+* http://jsperf.com/browserkit-extend-performance
 
 ## Methods
 
@@ -267,6 +268,27 @@ Clear an interval you've set with `B.setInterval`
 
 **intervalId** *(number)* <br>
 The id of the interval you'd like to clear.
+
+---
+#### B.type(*obj*)
+Returns the internal [[Class]] of an object as a string. Short said: an improved `typeof`.
+
+**obj** <br>
+Object you would like to know the internal [[Class]] of.
+
+**Example**
+``````
+B.type([]); //Array
+B.type(new Date); //Date
+B.type(2); //Number 
+``````
+
+---
+#### B.noConflict([*allVars*])
+Set the global `B` variable to its previous value. Returns a reference to `Browserkit`.
+
+**allVars** *(allVars)* <br>
+Also set the global `Browserkit` variable to its previous value.
 
 ---
 
