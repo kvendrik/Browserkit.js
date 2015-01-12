@@ -26,11 +26,11 @@ The stable version of Browserkit has been tested in the following browsers:
 
 
 ## Usage
-1. a. Grab the code from the dist/ folder and save it as a local copy <br>
-   b. Grab the code using `bower install browserkit.js`
+1. a. Grab the code from the [`dist/`](https://github.com/kvendrik/Browserkit.js/tree/master/dist) folder and save it as a local copy<br>
+   b. Grab the code from [Bower](http://bower.io/) using `bower install browserkit.js`
 2. Include it in your project
 ````
-<script src='browserkit.min.js'></script>
+<script src='/path/to/js/browserkit.min.js'></script>
 ````
 
 Next to using the whole library it is also possible to create custom builds that only include the methods you need for a particular project. For more info on how to do this please have a look at the [Custom Builds](#custom-builds) section of this page.
