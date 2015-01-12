@@ -1,4 +1,4 @@
-_defineMethod('find', function(){
+_defineMethod('find', (function(){
 	var clearResultsInClone;
 
 	return function(selector){
@@ -25,4 +25,4 @@ _defineMethod('find', function(){
 		return clone;
 
 	};
-}());
+}()));

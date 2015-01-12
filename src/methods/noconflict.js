@@ -1,4 +1,4 @@
-_defineMethod('noConflict', function(){
+_defineMethod('noConflict', (function(){
     var oldVals = {
         B: window.B,
         Browserkit: window.Browserkit
@@ -12,4 +12,4 @@ _defineMethod('noConflict', function(){
 
         return Browserkit;
     };
-}(), false);
+}()), false);

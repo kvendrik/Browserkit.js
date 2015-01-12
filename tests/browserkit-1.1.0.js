@@ -213,11 +213,10 @@ if(typeof document.documentElement.classList === 'object'){
 
 }
 
-(function(_defineMethod){
-
+_defineMethod('click', (function(){
 	var addEventToEl;
 
-	_defineMethod('click', function(handler){
+	return function(handler){
 
 		//on first invoke check if Google FastButton should be used
 		if(!addEventToEl){
@@ -235,9 +234,8 @@ if(typeof document.documentElement.classList === 'object'){
 		addEventToEl.call(this, handler);
 
 		return this;
-	});
-
-}(_defineMethod));
+	};
+}()));
 
 
 //RESIZE END
@@ -295,11 +293,10 @@ _defineMethod('extend', function(){
 
 }, false);
 
-(function(_defineMethod){
-
+_defineMethod('find', (function(){
 	var clearResultsInClone;
 
-	_defineMethod('find', function(selector){
+	return function(selector){
 
 		//init function on first invoke
 		if(!clearResultsInClone){
@@ -322,9 +319,8 @@ _defineMethod('extend', function(){
 
 		return clone;
 
-	});
-
-}(_defineMethod));
+	};
+}()));
 
 _defineMethod('forEach', function(obj, handler){
 
@@ -421,30 +417,27 @@ _defineMethod('clearInterval', function(intervalId){
 
 }, false);
 
-(function(){
+_defineMethod('noConflict', (function(){
+    var oldVals = {
+        B: window.B,
+        Browserkit: window.Browserkit
+    };
 
-var oldVals = {
-    B: window.B,
-    Browserkit: window.Browserkit
-};
+    return function(allVars){
+    	if(allVars === true){
+            window.Browserkit = oldVals.Browserkit;
+        }
+        window.B = oldVals.B;
 
-_defineMethod('noConflict', function(allVars){
-	if(allVars === true){
-        window.Browserkit = oldVals.Browserkit;
-    }
-    window.B = oldVals.B;
+        return Browserkit;
+    };
+}()), false);
 
-    return Browserkit;
-}, false);
-
-}());
-
-(function(_defineMethod){
-	
+_defineMethod('scrollTop', (function(){
 	var getWindowScrollTop,
 		docEl;
 
-	_defineMethod('scrollTop', function(){
+	return function(){
 		var el = this[0];
 
 		//on first use init getWindowScrollTop vars
@@ -464,15 +457,14 @@ _defineMethod('noConflict', function(allVars){
 			}
 		}
 
-		
+
 		if(el === window){
 			return getWindowScrollTop();
 		} else {
 			return el.scrollTop;
 		}
-	});
-
-}(_defineMethod));
+	};
+}()));
 
 _defineMethod('serialize', function(){
 
@@ -510,28 +502,26 @@ _defineMethod('serialize', function(){
 
 });
 
-(function(){
+_defineMethod('type', (function(){
+    var options = {
+        '[object Boolean]': 'boolean',
+        '[object Number]': 'number',
+        '[object String]': 'string',
+        '[object Function]': 'function',
+        '[object Array]': 'array',
+        '[object Date]': 'date',
+        '[object RegExp]': 'regexp',
+        '[object Object]': 'object',
+        '[object Error]': 'error',
+        '[object Undefined]': 'undefined',
+        '[object Null]': 'null'
+    };
 
-var options = {
-    '[object Boolean]': 'boolean',
-    '[object Number]': 'number',
-    '[object String]': 'string',
-    '[object Function]': 'function',
-    '[object Array]': 'array',
-    '[object Date]': 'date',
-    '[object RegExp]': 'regexp',
-    '[object Object]': 'object',
-    '[object Error]': 'error',
-    '[object Undefined]': 'undefined',
-    '[object Null]': 'null'
-};
-
-_defineMethod('type', function(obj){
-	var type = {}.toString.call(obj);
-	return options[type] || type.match(/\s(\w+)/)[1].toLowerCase();
-}, false);
-
-}());
+    return function(obj){
+	   var type = {}.toString.call(obj);
+	   return options[type] || type.match(/\s(\w+)/)[1].toLowerCase();
+    };
+}()), false);
 
 	Browserkit.fn = Browserkit.prototype;
 

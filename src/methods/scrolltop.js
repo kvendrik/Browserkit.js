@@ -1,4 +1,4 @@
-_defineMethod('scrollTop', function(){
+_defineMethod('scrollTop', (function(){
 	var getWindowScrollTop,
 		docEl;
 
@@ -29,4 +29,4 @@ _defineMethod('scrollTop', function(){
 			return el.scrollTop;
 		}
 	};
-}());
+}()));

@@ -1,4 +1,4 @@
-_defineMethod('click', function(){
+_defineMethod('click', (function(){
 	var addEventToEl;
 
 	return function(handler){
@@ -20,7 +20,7 @@ _defineMethod('click', function(){
 
 		return this;
 	};
-}());
+}()));
 
 
 //RESIZE END

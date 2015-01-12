@@ -1,4 +1,4 @@
-_defineMethod('type', function(){
+_defineMethod('type', (function(){
     var options = {
         '[object Boolean]': 'boolean',
         '[object Number]': 'number',
@@ -17,4 +17,4 @@ _defineMethod('type', function(){
 	   var type = {}.toString.call(obj);
 	   return options[type] || type.match(/\s(\w+)/)[1].toLowerCase();
     };
-}(), false);
+}()), false);
