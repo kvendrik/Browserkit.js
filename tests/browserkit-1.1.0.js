@@ -82,26 +82,26 @@ _defineMethod('ajax', function(settings){
 	httpRequest.onreadystatechange = function(){
 		if(httpRequest.readyState === 4){
 
-			if(httpRequest.status === 200){
-				var responseString = httpRequest.responseText,
-					rtrnData;
+			var responseString = httpRequest.responseText,
+				rtrnData;
 
-				if(dataType === 'json'){
-					try {
-						rtrnData = JSON.parse(responseString);
-					} catch(err){
-						rtrnData = responseString;
-					}
-				} else {
+			if(dataType === 'json'){
+				try {
+					rtrnData = JSON.parse(responseString);
+				} catch(err){
 					rtrnData = responseString;
 				}
+			} else {
+				rtrnData = responseString;
+			}
 
+			if(httpRequest.status === 200){
 				if(typeof settings.success === 'function'){
 					settings.success(rtrnData, httpRequest);
 				}
 			} else {
 				if(typeof settings.error === 'function'){
-					settings.error(httpRequest);
+					settings.error(rtrnData, httpRequest);
 				}
 			}
 
