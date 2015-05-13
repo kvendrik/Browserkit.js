@@ -80,23 +80,29 @@ _defineMethod('ajax', function(settings){
 		dataType = settings.dataType;
 
 	httpRequest.onreadystatechange = function(){
-		if(httpRequest.readyState === 4 && httpRequest.status === 200){
+		if(httpRequest.readyState === 4){
 
-			var responseString = httpRequest.responseText;
+			if(httpRequest.status === 200){
+				var responseString = httpRequest.responseText,
+					rtrnData;
 
-			var rtrnData;
-			if(dataType === 'json'){
-				try {
-					rtrnData = JSON.parse(responseString);
-				} catch(err){
+				if(dataType === 'json'){
+					try {
+						rtrnData = JSON.parse(responseString);
+					} catch(err){
+						rtrnData = responseString;
+					}
+				} else {
 					rtrnData = responseString;
 				}
-			} else {
-				rtrnData = responseString;
-			}
 
-			if(typeof settings.success === 'function'){
-				settings.success(rtrnData, httpRequest);
+				if(typeof settings.success === 'function'){
+					settings.success(rtrnData, httpRequest);
+				}
+			} else {
+				if(typeof settings.error === 'function'){
+					settings.error(httpRequest);
+				}
 			}
 
 		}
